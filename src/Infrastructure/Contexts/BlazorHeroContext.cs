@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DancePlatform.Domain.Entities.ExtendedAttributes;
-using DancePlatform.Domain.Entities.Misc;
 
 namespace DancePlatform.Infrastructure.Contexts
 {
@@ -28,9 +26,6 @@ namespace DancePlatform.Infrastructure.Contexts
         public DbSet<ChatHistory<BlazorHeroUser>> ChatHistories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        public DbSet<Document> Documents { get; set; }
-        public DbSet<DocumentType> DocumentTypes { get; set; }
-        public DbSet<DocumentExtendedAttribute> DocumentExtendedAttributes { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

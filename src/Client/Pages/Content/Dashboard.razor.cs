@@ -49,9 +49,6 @@ namespace DancePlatform.Client.Pages.Content
             {
                 ProductCount = response.Data.ProductCount;
                 BrandCount = response.Data.BrandCount;
-                DocumentCount = response.Data.DocumentCount;
-                DocumentTypeCount = response.Data.DocumentTypeCount;
-                DocumentExtendedAttributeCount = response.Data.DocumentExtendedAttributeCount;
                 UserCount = response.Data.UserCount;
                 RoleCount = response.Data.RoleCount;
                 foreach (var item in response.Data.DataEnterBarChart)

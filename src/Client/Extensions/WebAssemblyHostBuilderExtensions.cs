@@ -14,9 +14,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using DancePlatform.Client.Infrastructure.Managers.ExtendedAttribute;
-using DancePlatform.Domain.Entities.ExtendedAttributes;
-using DancePlatform.Domain.Entities.Misc;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace DancePlatform.Client.Extensions
@@ -58,7 +55,6 @@ namespace DancePlatform.Client.Extensions
                 .AddScoped<BlazorHeroStateProvider>()
                 .AddScoped<AuthenticationStateProvider, BlazorHeroStateProvider>()
                 .AddManagers()
-                .AddExtendedAttributeManagers()
                 .AddTransient<AuthenticationHeaderHandler>()
                 .AddScoped(sp => sp
                     .GetRequiredService<IHttpClientFactory>()
@@ -98,14 +94,6 @@ namespace DancePlatform.Client.Extensions
             }
 
             return services;
-        }
-
-        public static IServiceCollection AddExtendedAttributeManagers(this IServiceCollection services)
-        {
-            //TODO - add managers with reflection!
-
-            return services
-                .AddTransient(typeof(IExtendedAttributeManager<int, int, Document, DocumentExtendedAttribute>), typeof(ExtendedAttributeManager<int, int, Document, DocumentExtendedAttribute>));
         }
 
         private static void RegisterPermissionClaims(AuthorizationOptions options)
