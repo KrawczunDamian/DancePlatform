@@ -1,20 +1,20 @@
 ﻿using Blazored.FluentValidation;
-using DancePlatform.Application.Features.Brands.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Client.Extensions;
-using DancePlatform.Client.Infrastructure.Managers.Catalog.Brand;
+using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 
-namespace DancePlatform.Client.Pages.Catalog
+namespace DancePlatform.Client.Pages.Organisations
 {
-    public partial class AddEditBrandModal
+    public partial class AddEditTeamModal
     {
-        [Inject] private IBrandManager BrandManager { get; set; }
+        [Inject] private ITeamManager TeamManager { get; set; }
 
-        [Parameter] public AddEditBrandCommand AddEditBrandModel { get; set; } = new();
+        [Parameter] public AddEditTeamCommand AddEditTeamModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -28,7 +28,7 @@ namespace DancePlatform.Client.Pages.Catalog
 
         private async Task SaveAsync()
         {
-            var response = await BrandManager.SaveAsync(AddEditBrandModel);
+            var response = await TeamManager.SaveAsync(AddEditTeamModel);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);

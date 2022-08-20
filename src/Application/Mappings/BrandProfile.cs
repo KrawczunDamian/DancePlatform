@@ -2,6 +2,7 @@
 using DancePlatform.Application.Features.Brands.Commands.AddEdit;
 using DancePlatform.Application.Features.Brands.Queries.GetAll;
 using DancePlatform.Application.Features.Brands.Queries.GetById;
+using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Domain.Entities.Catalog;
 
 namespace DancePlatform.Application.Mappings

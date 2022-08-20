@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using DancePlatform.Client.Infrastructure.Managers.Catalog.Brand;
 using DancePlatform.Client.Infrastructure.Managers.Catalog.Product;
+using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 
 namespace DancePlatform.Client.Pages.Catalog
 {
@@ -111,7 +112,6 @@ namespace DancePlatform.Client.Pages.Catalog
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
                 AddEditProductModel.ImageDataURL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, UploadType = Application.Enums.UploadType.Product, Extension = extension };
             }
         }
 
