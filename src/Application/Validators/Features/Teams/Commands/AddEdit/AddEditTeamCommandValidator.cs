@@ -12,8 +12,6 @@ namespace DancePlatform.Application.Validators.Features.Teams.Commands.AddEdit
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Name is required!"]);
             RuleFor(request => request.Description)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Description is required!"]);
-            RuleFor(request => request.Tax)
-                .GreaterThan(0).WithMessage(x => localizer["Tax must be greater than 0"]);
         }
     }
 }

@@ -302,5 +302,39 @@
             </summary>
             <returns>Status 200 OK </returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.GetAll">
+            <summary>
+            Get All Teams
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.GetById(System.Int32)">
+            <summary>
+            Get a Team By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.Post(DancePlatform.Application.Features.Teams.Commands.AddEdit.AddEditTeamCommand)">
+            <summary>
+            Create/Update a Team
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.Delete(System.Int32)">
+            <summary>
+            Delete a Team
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.Export(System.String)">
+            <summary>
+            Search Teams and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

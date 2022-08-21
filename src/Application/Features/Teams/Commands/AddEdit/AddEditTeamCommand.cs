@@ -18,8 +18,6 @@ namespace DancePlatform.Application.Features.Teams.Commands.AddEdit
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
-        public decimal Tax { get; set; }
     }
 
     internal class AddEditTeamCommandHandler : IRequestHandler<AddEditTeamCommand, Result<int>>

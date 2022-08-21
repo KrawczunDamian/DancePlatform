@@ -35,8 +35,8 @@ namespace DancePlatform.Application.Features.Teams.Queries.GetAll
         public async Task<Result<List<GetAllTeamsResponse>>> Handle(GetAllTeamsQuery request, CancellationToken cancellationToken)
         {
             Func<Task<List<Team>>> getAllTeams = () => _unitOfWork.Repository<Team>().GetAllAsync();
-            var brandList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllTeamsCacheKey, getAllTeams);
-            var mappedTeams = _mapper.Map<List<GetAllTeamsResponse>>(brandList);
+            var teamList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllTeamsCacheKey, getAllTeams);
+            var mappedTeams = _mapper.Map<List<GetAllTeamsResponse>>(teamList);
             return await Result<List<GetAllTeamsResponse>>.SuccessAsync(mappedTeams);
         }
     }

@@ -1,20 +1,19 @@
-﻿using DancePlatform.Application.Features.Brands.Queries.GetAll;
+﻿using DancePlatform.Application.Features.Brands.Commands.AddEdit;
+using DancePlatform.Application.Features.Brands.Queries.GetAll;
 using DancePlatform.Client.Extensions;
+using DancePlatform.Client.Infrastructure.Managers.Catalog.Brand;
 using DancePlatform.Shared.Constants.Application;
+using DancePlatform.Shared.Constants.Permission;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.JSInterop;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DancePlatform.Application.Features.Brands.Commands.AddEdit;
-using DancePlatform.Client.Infrastructure.Managers.Catalog.Brand;
-using DancePlatform.Shared.Constants.Permission;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.JSInterop;
-using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 
 namespace DancePlatform.Client.Pages.Catalog
 {

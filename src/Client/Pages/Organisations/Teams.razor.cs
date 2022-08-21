@@ -138,8 +138,7 @@ namespace DancePlatform.Client.Pages.Organisations
                     {
                         Id = _team.Id,
                         Name = _team.Name,
-                        Description = _team.Description,
-                        Tax = _team.Tax
+                        Description = _team.Description
                     });
                 }
             }
