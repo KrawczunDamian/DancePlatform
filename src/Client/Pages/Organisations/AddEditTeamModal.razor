@@ -35,6 +35,12 @@
                 <MudItem xs="12" md="6">
                     <MudTextField For="@(() => AddEditTeamModel.Description)" @bind-Value="AddEditTeamModel.Description" Label="@_localizer["Description"]" />
                 </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditTeamModel.Country)" @bind-Value="AddEditTeamModel.Country" Label="@_localizer["Country"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditTeamModel.City)" @bind-Value="AddEditTeamModel.City" Label="@_localizer["City"]" />
+                </MudItem>
             </MudGrid>
         </DialogContent>
         <DialogActions>
