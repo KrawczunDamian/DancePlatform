@@ -7,6 +7,17 @@
     .mud-table-container {
         overflow: auto;
     }
+    .selected {
+        background-color: #1E88E5 !important;
+    }
+
+        .selected > td {
+            color: white !important;
+        }
+
+            .selected > td .mud-input {
+                color: white !important;
+            }
 </style>
 
 
@@ -46,7 +57,9 @@ else
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Name">
+                <MudNavLink Href="/organisations/team">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                </MudNavLink>
             </MudTd>
             <MudTd DataLabel="Description">
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />

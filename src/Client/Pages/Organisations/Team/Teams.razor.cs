@@ -6,6 +6,7 @@ using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -14,7 +15,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace DancePlatform.Client.Pages.Organisations.Team
 {
@@ -199,5 +199,12 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 return string.Empty;
             }
         }
+        /*private async Task GoToTeam(int id = 0)
+        {
+            if (id != 0)
+            {
+               UriHelper.NavigateTo
+            }
+        }*/
     }
 }

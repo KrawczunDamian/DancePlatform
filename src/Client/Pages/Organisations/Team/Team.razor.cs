@@ -17,6 +17,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
     {
         [Inject] private ITeamManager TeamManager { get; set; }
 
+        [Parameter] public int teamId { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private GetTeamByIdResponse _team = new();
