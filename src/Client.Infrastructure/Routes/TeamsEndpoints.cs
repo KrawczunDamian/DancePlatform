@@ -10,6 +10,7 @@
         public static string Export = "api/v1/teams/export";
 
         public static string GetAll = "api/v1/teams";
+        public static string GetById = "api/v1/teams";
         public static string Delete = "api/v1/teams";
         public static string Save = "api/v1/teams";
         public static string GetCount = "api/v1/teams/count";

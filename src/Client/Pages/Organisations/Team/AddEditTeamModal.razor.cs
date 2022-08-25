@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 
-namespace DancePlatform.Client.Pages.Organisations
+namespace DancePlatform.Client.Pages.Organisations.Team
 {
     public partial class AddEditTeamModal
     {

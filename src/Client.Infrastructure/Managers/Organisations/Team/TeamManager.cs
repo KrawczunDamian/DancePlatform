@@ -1,11 +1,12 @@
-﻿using DancePlatform.Application.Features.Teams.Queries.GetAll;
+﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Infrastructure.Extensions;
 using DancePlatform.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 
 namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
 {
@@ -36,6 +37,11 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
         {
             var response = await _httpClient.GetAsync(Routes.TeamsEndpoints.GetAll);
             return await response.ToResult<List<GetAllTeamsResponse>>();
+        }
+        public async Task<IResult<GetTeamByIdResponse>> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"{Routes.TeamsEndpoints.GetById}/{id}");
+            return await response.ToResult<GetTeamByIdResponse>();
         }
 
         public async Task<IResult<int>> SaveAsync(AddEditTeamCommand request)

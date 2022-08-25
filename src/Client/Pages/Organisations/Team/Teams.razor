@@ -16,7 +16,7 @@
 }
 else
 {
-    <MudTable Hover="true" Elevation="25" Items="_teamList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<GetAllTeamsResponse, bool>(Search)" @bind-team="_team">
+    <MudTable Hover="true" Elevation="25" Items="_teamList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<GetAllTeamsResponse, bool>(Search)" @bind-team="_team" @ref="_teamsTable" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent" T="GetAllTeamsResponse">
         <ToolBarContent>
             <HeroTitle Title="@_localizer["Teams"]"/>
             <div class="justify-center mud-text-align-center ml-4">
