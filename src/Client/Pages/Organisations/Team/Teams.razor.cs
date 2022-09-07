@@ -6,6 +6,7 @@ using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -15,7 +16,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace DancePlatform.Client.Pages.Organisations
+namespace DancePlatform.Client.Pages.Organisations.Team
 {
     public partial class Teams
     {
@@ -37,6 +38,10 @@ namespace DancePlatform.Client.Pages.Organisations
         private bool _canExportTeams;
         private bool _canSearchTeams;
         private bool _loaded;
+
+        private int _selectedRowNumber = -1;
+        private MudTable<GetAllTeamsResponse> _teamsTable;
+        private List<string> clickedEvents = new();
 
         protected override async Task OnInitializedAsync()
         {
@@ -134,7 +139,7 @@ namespace DancePlatform.Client.Pages.Organisations
                 _team = _teamList.FirstOrDefault(c => c.Id == id);
                 if (_team != null)
                 {
-                    parameters.Add(nameof(AddEditTeamModal.AddEditTeamModel), new AddEditTeamCommand
+                    parameters.Add(nameof(AddEditTeamModal), new AddEditTeamCommand
                     {
                         Id = _team.Id,
                         Name = _team.Name,
@@ -170,5 +175,30 @@ namespace DancePlatform.Client.Pages.Organisations
             }
             return false;
         }
+        private void RowClickEvent(TableRowClickEventArgs<GetAllTeamsResponse> tableRowClickEventArgs)
+        {
+            clickedEvents.Add("Row has been clicked");
+        }
+
+        private string SelectedRowClassFunc(GetAllTeamsResponse team, int rowNumber)
+        {
+
+            if (_selectedRowNumber == rowNumber)
+            {
+                _selectedRowNumber = -1;
+                clickedEvents.Add("Selected Row: None");
+                return string.Empty;
+            }
+            else if (_teamsTable.SelectedItem != null && _teamsTable.SelectedItem.Equals(team))
+            {
+                _selectedRowNumber = rowNumber;
+                clickedEvents.Add($"Selected Row: {rowNumber}");
+                return "selected";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }        
     }
 }

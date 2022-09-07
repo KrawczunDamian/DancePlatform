@@ -1,12 +1,12 @@
-﻿using DancePlatform.Application.Features.Teams.Queries.GetAll;
+﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.Delete;
+using DancePlatform.Application.Features.Teams.Queries.Export;
+using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using DancePlatform.Application.Features.Teams.Commands.AddEdit;
-using DancePlatform.Application.Features.Teams.Commands.Delete;
-using DancePlatform.Application.Features.Teams.Queries.Export;
 
 namespace DancePlatform.Server.Controllers.v1.Organisations
 {

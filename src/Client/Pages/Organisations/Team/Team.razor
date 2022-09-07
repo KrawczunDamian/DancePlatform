@@ -1,0 +1,20 @@
+﻿@page "/organisations/team/{teamId:int}"
+@attribute [Authorize(Policy = Permissions.Teams.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Teams> _localizer
+@using DancePlatform.Application.Features.Teams.Queries.GetById
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    @teamId
+}
