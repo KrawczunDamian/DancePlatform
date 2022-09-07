@@ -182,6 +182,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
 
         private string SelectedRowClassFunc(GetAllTeamsResponse team, int rowNumber)
         {
+
             if (_selectedRowNumber == rowNumber)
             {
                 _selectedRowNumber = -1;
@@ -198,13 +199,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             {
                 return string.Empty;
             }
-        }
-        /*private async Task GoToTeam(int id = 0)
-        {
-            if (id != 0)
-            {
-               UriHelper.NavigateTo
-            }
-        }*/
+        }        
     }
 }

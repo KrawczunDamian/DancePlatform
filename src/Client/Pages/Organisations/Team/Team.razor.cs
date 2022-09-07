@@ -40,7 +40,8 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             _canExportTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Export)).Succeeded;
             _canSearchTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Search)).Succeeded;
 
-            await GetTeamAsync();
+
+            await GetTeamAsync(teamId);
             _loaded = true;
             HubConnection = HubConnection.TryInitialize(_navigationManager);
             if (HubConnection.State == HubConnectionState.Disconnected)

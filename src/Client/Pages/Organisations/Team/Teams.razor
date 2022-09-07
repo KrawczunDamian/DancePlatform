@@ -57,7 +57,8 @@ else
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Name">
-                <MudNavLink Href="/organisations/team">
+                <MudNavLink Href="@($"/organisations/team/{context.Id}")" Tag="@context.Id">
+                @*<MudNavLink Href="@($"/organisations/team")" Tag="@context.Id">*@
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
                 </MudNavLink>
             </MudTd>
