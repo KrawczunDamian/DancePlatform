@@ -1,4 +1,5 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
@@ -30,7 +31,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private bool _canExportTeams;
         private bool _canSearchTeams;
         private bool _loaded;
-
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();

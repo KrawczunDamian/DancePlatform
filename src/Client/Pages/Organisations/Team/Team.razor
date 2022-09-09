@@ -16,5 +16,47 @@
 }
 else
 {
-    @teamId
+    <MudContainer Fixed="true">
+        <MudGrid Spacing="0">
+            <MudItem xs="3">
+                <MudPaper Class="pa-2" Square="true"><BigTitle Title="@_localizer["Team"]" /></MudPaper>
+                <MudPaper Class="pa-2" Square="true">
+                    <MudGrid Spacing="1" Class="align-center">
+                        <MudItem style="height:100%">
+                            <MudIcon Icon="@Icons.Filled.PictureAsPdf" />
+                        </MudItem>
+                        <MudItem style="height:100%">
+                            <MudText>@_team.Name | @_team.Country</MudText>
+                            <MudText><MudIcon Icon="@Icons.Filled.Smartphone"></MudIcon> @(_team.PhoneNumber == null ? "-" : _team.PhoneNumber) </MudText>
+                        </MudItem>
+                    </MudGrid>
+                </MudPaper>
+                <MudPaper Class="pa-2" Square="true">
+                    <MudGrid Spacing="1" Class="align-center">
+                        <MudItem Class="ma-3" xs="12">
+                            <MiniTitle Title="@_localizer["Description"]" />
+                            <MudText>
+                                @_team.Description
+                            </MudText>
+                        </MudItem>
+                        <MudItem Class="ma-3">
+                            <MiniTitle Title="@_localizer["Country"]"/>
+                            <MudText>@_team.Country</MudText>
+                        </MudItem>
+                        <MudItem Class="ma-3">
+                            <MiniTitle Title="@_localizer["City"]"/>
+                            <MudText>@_team.City</MudText>
+                        </MudItem>
+                    </MudGrid>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="8">
+                <MudPaper Class="pa-2" Square="true">
+                    <MudText>CONTENTT</MudText>
+                    JAZDAAA
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
 }

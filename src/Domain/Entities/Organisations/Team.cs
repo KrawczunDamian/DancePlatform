@@ -9,10 +9,10 @@ namespace DancePlatform.Domain.Entities.Organisations
         public string Name { get; set; }
         public string Description { get; set; }
         [Column(TypeName = "text")]
-        public string ProfilePictureURL { get; set; }         
+        public string ProfilePictureURL { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        public string PhoneNumber { get; set; }        
+        public string PhoneNumber { get; set; }
         public DateTime? CreatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }

@@ -39,9 +39,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private bool _canSearchTeams;
         private bool _loaded;
 
-        private int _selectedRowNumber = -1;
         private MudTable<GetAllTeamsResponse> _teamsTable;
-        private List<string> clickedEvents = new();
 
         protected override async Task OnInitializedAsync()
         {
@@ -174,31 +172,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 return true;
             }
             return false;
-        }
-        private void RowClickEvent(TableRowClickEventArgs<GetAllTeamsResponse> tableRowClickEventArgs)
-        {
-            clickedEvents.Add("Row has been clicked");
-        }
-
-        private string SelectedRowClassFunc(GetAllTeamsResponse team, int rowNumber)
-        {
-
-            if (_selectedRowNumber == rowNumber)
-            {
-                _selectedRowNumber = -1;
-                clickedEvents.Add("Selected Row: None");
-                return string.Empty;
-            }
-            else if (_teamsTable.SelectedItem != null && _teamsTable.SelectedItem.Equals(team))
-            {
-                _selectedRowNumber = rowNumber;
-                clickedEvents.Add($"Selected Row: {rowNumber}");
-                return "selected";
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }        
+        }     
     }
 }
