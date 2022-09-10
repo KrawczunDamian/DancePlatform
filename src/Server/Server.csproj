@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Utilities\ExtendedAttributes\" />
+    <Folder Include="Files\Images\TeamProfilePictures\" />
     <Folder Include="Files\Images\ProfilePictures\" />
   </ItemGroup>
 

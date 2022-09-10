@@ -1,8 +1,10 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Application.Features.Teams.Commands.Delete;
+using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.Export;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
+using DancePlatform.Application.Features.Teams.Queries.GetProfilePicture;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +73,30 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         public async Task<IActionResult> Export(string searchString = "")
         {
             return Ok(await _mediator.Send(new ExportTeamsQuery(searchString)));
+        }
+
+        /// <summary>
+        /// Get Profile picture by Id
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns>Status 200 OK </returns>
+        [HttpGet("getProfilePicture/{teamId}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Client, Duration = 60)]
+        public async Task<IActionResult> GetProfilePictureAsync(int teamId)
+        {
+            return Ok(await _mediator.Send(new GetProfilePictureTeamQuery() { TeamId = teamId }));
+        }
+
+        /// <summary>
+        /// Update team's profile picture
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Create)]
+        [HttpPost("updateProfilePicture")]
+        public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureTeamCommand command)
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }

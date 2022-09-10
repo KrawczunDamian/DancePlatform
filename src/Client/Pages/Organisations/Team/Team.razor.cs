@@ -1,16 +1,22 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
+using DancePlatform.Application.Requests.Identity;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
+using DancePlatform.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
+using System.IO;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 
 namespace DancePlatform.Client.Pages.Organisations.Team
 {
@@ -23,6 +29,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
 
         private GetTeamByIdResponse _team = new();
         private string _searchString = "";
+        private char _firstLetterOfName;
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreateTeams;
@@ -42,6 +49,15 @@ namespace DancePlatform.Client.Pages.Organisations.Team
 
 
             await GetTeamAsync(teamId);
+            var data = await TeamManager.GetProfilePictureAsync(teamId);
+            if (data.Succeeded)
+            {
+                ImageDataUrl = data.Data;
+            }
+            if (_team.Name.Length > 0)
+            {
+                _firstLetterOfName = _team.Name[0];
+            }
             _loaded = true;
             HubConnection = HubConnection.TryInitialize(_navigationManager);
             if (HubConnection.State == HubConnectionState.Disconnected)
@@ -111,6 +127,38 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEditTeamModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
+        }
+        private IBrowserFile _file;
+
+        [Parameter]
+        public string ImageDataUrl { get; set; }
+
+        private async Task UploadFiles(InputFileChangeEventArgs e)
+        {
+            _file = e.File;
+            if (_file != null)
+            {
+                var extension = Path.GetExtension(_file.Name);
+                var fileName = $"{teamId}-{Guid.NewGuid()}{extension}";
+                var format = "image/png";
+                var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
+                var buffer = new byte[imageFile.Size];
+                await imageFile.OpenReadStream().ReadAsync(buffer);
+                var request = new UpdateProfilePictureTeamCommand { TeamId = teamId ,Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.TeamProfilePicture };
+                var result = await TeamManager.UpdateProfilePictureAsync(request);
+                if (result.Succeeded)
+                {
+                    _snackBar.Add(_localizer["Profile picture added."], Severity.Success);
+                    _navigationManager.NavigateTo($"/organisations/team/{teamId}", true);
+                }
+                else
+                {
+                    foreach (var error in result.Messages)
+                    {
+                        _snackBar.Add(error, Severity.Error);
+                    }
+                }
+            }
         }
     }
 }

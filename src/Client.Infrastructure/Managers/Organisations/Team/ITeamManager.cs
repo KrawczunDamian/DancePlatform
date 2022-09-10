@@ -1,4 +1,5 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Shared.Wrapper;
@@ -17,5 +18,7 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
         Task<IResult<int>> DeleteAsync(int id);
 
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
+        Task<IResult<string>> GetProfilePictureAsync(int teamId);
+        Task<IResult<int>> UpdateProfilePictureAsync(UpdateProfilePictureTeamCommand request);
     }
 }

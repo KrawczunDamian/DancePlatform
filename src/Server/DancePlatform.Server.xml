@@ -336,5 +336,19 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.GetProfilePictureAsync(System.Int32)">
+            <summary>
+            Get Profile picture by Id
+            </summary>
+            <param name="teamId"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.UpdateProfilePicture(DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture.UpdateProfilePictureTeamCommand)">
+            <summary>
+            Update team's profile picture
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
     </members>
 </doc>

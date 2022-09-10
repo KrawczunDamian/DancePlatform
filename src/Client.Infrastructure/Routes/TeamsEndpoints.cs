@@ -8,6 +8,9 @@
         }
 
         public static string Export = "api/v1/teams/export";
+        public static string GetProfilePicture = "api/v1/teams/GetProfilePicture";
+        public static string UpdateProfilePicture = "api/v1/teams/updateProfilePicture";
+        
 
         public static string GetAll = "api/v1/teams";
         public static string GetById = "api/v1/teams";

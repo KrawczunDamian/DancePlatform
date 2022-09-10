@@ -1,4 +1,5 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Infrastructure.Extensions;
@@ -47,6 +48,16 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
         public async Task<IResult<int>> SaveAsync(AddEditTeamCommand request)
         {
             var response = await _httpClient.PostAsJsonAsync(Routes.TeamsEndpoints.Save, request);
+            return await response.ToResult<int>();
+        }
+        public async Task<IResult<string>> GetProfilePictureAsync(int teamId)
+        {
+            var response = await _httpClient.GetAsync($"{Routes.TeamsEndpoints.GetProfilePicture}/{teamId}");
+            return await response.ToResult<string>();
+        }
+        public async Task<IResult<int>> UpdateProfilePictureAsync(UpdateProfilePictureTeamCommand request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(Routes.TeamsEndpoints.UpdateProfilePicture, request);
             return await response.ToResult<int>();
         }
     }

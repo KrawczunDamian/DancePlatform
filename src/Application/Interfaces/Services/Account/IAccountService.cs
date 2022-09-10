@@ -1,5 +1,6 @@
 ﻿using DancePlatform.Application.Interfaces.Common;
 using DancePlatform.Application.Requests.Identity;
+using DancePlatform.Application.Requests.Organisations.Team;
 using DancePlatform.Shared.Wrapper;
 using System.Threading.Tasks;
 

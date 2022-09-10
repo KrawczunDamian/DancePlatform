@@ -19,17 +19,32 @@ else
     <MudContainer Fixed="true">
         <MudGrid Spacing="0">
             <MudItem xs="3">
-                <MudPaper Class="pa-2" Square="true"><BigTitle Title="@_localizer["Team"]" /></MudPaper>
+                <MudPaper Class="pa-2 justify-center" Square="true"><BigTitle Title="@_localizer["Team"]"/></MudPaper>
                 <MudPaper Class="pa-2" Square="true">
-                    <MudGrid Spacing="1" Class="align-center">
-                        <MudItem style="height:100%">
-                            <MudIcon Icon="@Icons.Filled.PictureAsPdf" />
-                        </MudItem>
-                        <MudItem style="height:100%">
-                            <MudText>@_team.Name | @_team.Country</MudText>
-                            <MudText><MudIcon Icon="@Icons.Filled.Smartphone"></MudIcon> @(_team.PhoneNumber == null ? "-" : _team.PhoneNumber) </MudText>
-                        </MudItem>
-                    </MudGrid>
+                    <MudContainer Class="pa-2">
+                        <div class="d-flex justify-center">
+                            @if (!string.IsNullOrEmpty(@ImageDataUrl))
+                            {
+                                <MudAvatar Image="@ImageDataUrl" Style="height:250px; width:250px;"> </MudAvatar>
+                            }
+                            else
+                            {
+                                <MudAvatar Color="Color.Secondary" Style="height:250px; width:250px;">@_firstLetterOfName</MudAvatar>
+                            }
+                        </div>
+                        <MudText Class="d-flex justify-center ma-2" Style="font-weight:bold">@_team.Name</MudText>
+                        <MudText Class="d-flex justify-center ma-2"><MudIcon Icon="@Icons.Filled.Smartphone"></MudIcon> @(_team.PhoneNumber == null ? "-" : _team.PhoneNumber) </MudText>
+                        <InputFile id="fileInput" OnChange="UploadFiles" hidden />
+                        <MudButton HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               StartIcon="@Icons.Filled.CloudUpload"
+                               for="fileInput"
+                               Class="d-flex justify-center ma-2">
+                            @_localizer["Upload Image"]
+                        </MudButton>
+                    </MudContainer>
                 </MudPaper>
                 <MudPaper Class="pa-2" Square="true">
                     <MudGrid Spacing="1" Class="align-center">
@@ -40,11 +55,11 @@ else
                             </MudText>
                         </MudItem>
                         <MudItem Class="ma-3">
-                            <MiniTitle Title="@_localizer["Country"]"/>
+                            <MiniTitle Title="@_localizer["Country"]" />
                             <MudText>@_team.Country</MudText>
                         </MudItem>
                         <MudItem Class="ma-3">
-                            <MiniTitle Title="@_localizer["City"]"/>
+                            <MiniTitle Title="@_localizer["City"]" />
                             <MudText>@_team.City</MudText>
                         </MudItem>
                     </MudGrid>
@@ -52,9 +67,19 @@ else
             </MudItem>
 
             <MudItem xs="8">
-                <MudPaper Class="pa-2" Square="true">
-                    <MudText>CONTENTT</MudText>
-                    JAZDAAA
+                <MudPaper Square="true">
+                    <MudPaper Class="pa-2" Square="true">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">Posts@*LOCALIZER*@</MudText>
+                    </MudPaper>
+                    <MudPaper Class="pa-2" Square="true">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">Events@*LOCALIZER*@</MudText>
+                    </MudPaper>
+                    <MudPaper Class="pa-2" Square="true">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">Photos@*LOCALIZER*@</MudText>
+                    </MudPaper>
+                    <MudPaper Class="pa-2" Square="true">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">Members@*LOCALIZER*@</MudText>
+                    </MudPaper>
                 </MudPaper>
             </MudItem>
         </MudGrid>
