@@ -117,19 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>Account</value>
+  <data name="Change Password" xml:space="preserve">
+    <value>Change Password</value>
   </data>
-  <data name="Dancer" xml:space="preserve">
-    <value>Dancer</value>
+  <data name="Current Password" xml:space="preserve">
+    <value>Current Password</value>
   </data>
-  <data name="Manage your account" xml:space="preserve">
-    <value>Manage your account</value>
+  <data name="Incorrect Password." xml:space="preserve">
+    <value>Incorrect Password.</value>
   </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
   </data>
-  <data name="Security" xml:space="preserve">
-    <value>Security</value>
+  <data name="Password Changed!" xml:space="preserve">
+    <value>Password Changed!</value>
+  </data>
+  <data name="Password Confirmation" xml:space="preserve">
+    <value>Password Confirmation</value>
+  </data>
+  <data name="Password Confirmation is required!" xml:space="preserve">
+    <value>Password Confirmation is required!</value>
+  </data>
+  <data name="Password is required!" xml:space="preserve">
+    <value>Password is required!</value>
+  </data>
+  <data name="Password must be at least of length 8" xml:space="preserve">
+    <value>Password must be at least of length 8</value>
+  </data>
+  <data name="Password must contain at least one capital letter" xml:space="preserve">
+    <value>Password must contain at least one capital letter</value>
+  </data>
+  <data name="Password must contain at least one digit" xml:space="preserve">
+    <value>Password must contain at least one digit</value>
+  </data>
+  <data name="Password must contain at least one lowercase letter" xml:space="preserve">
+    <value>Password must contain at least one lowercase letter</value>
+  </data>
+  <data name="Passwords don't match" xml:space="preserve">
+    <value>Passwords don't match</value>
   </data>
 </root>
