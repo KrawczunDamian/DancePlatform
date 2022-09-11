@@ -6,8 +6,4 @@
     <AssemblyName>DancePlatform.Domain</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Nowy folder\" />
-  </ItemGroup>
-
 </Project>

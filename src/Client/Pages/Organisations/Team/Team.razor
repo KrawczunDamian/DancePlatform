@@ -19,7 +19,7 @@ else
     <MudContainer Fixed="true">
         <MudGrid Spacing="0">
             <MudItem xs="3">
-                <MudPaper Class="pa-2 justify-center" Square="true"><BigTitle Title="@_localizer["Team"]"/></MudPaper>
+                <MudPaper Class="pa-2 justify-center" Square="true"><BigTitle Title="@_localizer["Team"]" /></MudPaper>
                 <MudPaper Class="pa-2" Square="true">
                     <MudContainer Class="pa-2">
                         <div class="d-flex justify-center">
@@ -78,7 +78,15 @@ else
                         <MudText Typo="Typo.h4" Color="Color.Primary">Photos@*LOCALIZER*@</MudText>
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
-                        <MudText Typo="Typo.h4" Color="Color.Primary">Members@*LOCALIZER*@</MudText>
+                        <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">Members@*LOCALIZER*@</MudText>
+                        <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
+                        <MudCarousel ItemsSource="_teamMembers" Style="height:200px">
+                            <ItemTemplate>
+                                <div class="d-flex flex-column flex-column justify-center" style="height:100%">
+                                    <MudText Align="@Align.Center" Class="mx-auto">@context.Nickname</MudText>
+                                </div>
+                            </ItemTemplate>
+                        </MudCarousel>
                     </MudPaper>
                 </MudPaper>
             </MudItem>

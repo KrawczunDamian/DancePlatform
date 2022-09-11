@@ -350,5 +350,25 @@
             <param name="command"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.AddTeamMember(DancePlatform.Application.Features.Teams.Commands.AddMember.AddTeamMemberCommand)">
+            <summary>
+            Add a member to team
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.GetTeamMembersAsync(System.Int32)">
+            <summary>
+            Get team's members
+            </summary>
+            <param name="teamId"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.UserProfile.DancersController.GetAll">
+            <summary>
+            Get All Dancers
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
     </members>
 </doc>

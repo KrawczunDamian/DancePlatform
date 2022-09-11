@@ -1,22 +1,24 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.AddMember;
+using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
-using DancePlatform.Application.Requests.Identity;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
+using DancePlatform.Client.Infrastructure.Managers.UserProfile;
+using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
-using DancePlatform.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
-using System.IO;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 
 namespace DancePlatform.Client.Pages.Organisations.Team
 {
@@ -28,8 +30,8 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private GetTeamByIdResponse _team = new();
-        private string _searchString = "";
         private char _firstLetterOfName;
+        private List<Dancer> _teamMembers = new();
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreateTeams;
@@ -49,6 +51,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
 
 
             await GetTeamAsync(teamId);
+            await GetTeamMembersAsync(teamId);
             var data = await TeamManager.GetProfilePictureAsync(teamId);
             if (data.Succeeded)
             {
@@ -72,6 +75,21 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             if (response.Succeeded)
             {
                 _team = response.Data;
+            }
+            else
+            {
+                foreach (var message in response.Messages)
+                {
+                    _snackBar.Add(message, Severity.Error);
+                }
+            }
+        }
+        private async Task GetTeamMembersAsync(int id = 0)
+        {
+            var response = await TeamManager.GetTeamMembersAsync(id);
+            if (response.Succeeded)
+            {
+                _teamMembers = response.Data;
             }
             else
             {
@@ -109,10 +127,18 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 }
             }
         }
-        private async Task InvokeModal(int id = 0)
+        private async Task AddMember(int id = 0)
         {
+            /*var parameters = new DialogParameters();
+            if(_team != null)
+            {
+                parameters.Add(nameof(AddTeamMemberModal),_team.Id);
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
+            var result = await dialog.Result;*/
             var parameters = new DialogParameters();
-            if (id != 0)
+            if (_team.Id != 0)
             {
                 if (_team != null)
                 {
@@ -125,8 +151,16 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditTeamModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = _dialogService.Show<AddEditTeamModal>(_team.Id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await Reset();
+            }
+        }
+        private async Task Reset()
+        {
+            await GetTeamMembersAsync();
         }
         private IBrowserFile _file;
 
@@ -144,7 +178,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
-                var request = new UpdateProfilePictureTeamCommand { TeamId = teamId ,Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.TeamProfilePicture };
+                var request = new UpdateProfilePictureTeamCommand { TeamId = teamId, Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.TeamProfilePicture };
                 var result = await TeamManager.UpdateProfilePictureAsync(request);
                 if (result.Succeeded)
                 {

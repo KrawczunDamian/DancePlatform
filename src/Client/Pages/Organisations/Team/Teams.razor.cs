@@ -1,7 +1,9 @@
-﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
+using DancePlatform.Client.Infrastructure.Managers.UserProfile;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;

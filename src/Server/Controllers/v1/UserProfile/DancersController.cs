@@ -1,79 +1,72 @@
-﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
-using DancePlatform.Application.Features.Teams.Commands.AddMember;
-using DancePlatform.Application.Features.Teams.Commands.Delete;
-using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
-using DancePlatform.Application.Features.Teams.Queries.Export;
-using DancePlatform.Application.Features.Teams.Queries.GetAll;
-using DancePlatform.Application.Features.Teams.Queries.GetById;
-using DancePlatform.Application.Features.Teams.Queries.GetProfilePicture;
+﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace DancePlatform.Server.Controllers.v1.Organisations
+namespace DancePlatform.Server.Controllers.v1.UserProfile
 {
-    public class TeamsController : BaseApiController<TeamsController>
+    public class DancersController : BaseApiController<DancersController>
     {
         /// <summary>
-        /// Get All Teams
+        /// Get All Dancers
         /// </summary>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.View)]
+        [Authorize(Policy = Permissions.Dancers.View)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var teams = await _mediator.Send(new GetAllTeamsQuery());
+            var teams = await _mediator.Send(new GetAllDancersQuery());
             return Ok(teams);
         }
-
+        /*
         /// <summary>
-        /// Get a Team By Id
+        /// Get a Dancer By Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 Ok</returns>
-        [Authorize(Policy = Permissions.Teams.View)]
+        [Authorize(Policy = Permissions.Dancers.View)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var team = await _mediator.Send(new GetTeamByIdQuery() { Id = id });
+            var team = await _mediator.Send(new GetDancerByIdQuery() { Id = id });
             return Ok(team);
         }
 
         /// <summary>
-        /// Create/Update a Team
+        /// Create/Update a Dancer
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Create)]
+        [Authorize(Policy = Permissions.Dancers.Create)]
         [HttpPost]
-        public async Task<IActionResult> Post(AddEditTeamCommand command)
+        public async Task<IActionResult> Post(AddEditDancerCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
 
         /// <summary>
-        /// Delete a Team
+        /// Delete a Dancer
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Delete)]
+        [Authorize(Policy = Permissions.Dancers.Delete)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await _mediator.Send(new DeleteTeamCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteDancerCommand { Id = id }));
         }
 
         /// <summary>
-        /// Search Teams and Export to Excel
+        /// Search Dancers and Export to Excel
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns></returns>
-        [Authorize(Policy = Permissions.Teams.Export)]
+        [Authorize(Policy = Permissions.Dancers.Export)]
         [HttpGet("export")]
         public async Task<IActionResult> Export(string searchString = "")
         {
-            return Ok(await _mediator.Send(new ExportTeamsQuery(searchString)));
+            return Ok(await _mediator.Send(new ExportDancersQuery(searchString)));
         }
 
         /// <summary>
@@ -85,7 +78,7 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Client, Duration = 60)]
         public async Task<IActionResult> GetProfilePictureAsync(int teamId)
         {
-            return Ok(await _mediator.Send(new GetProfilePictureTeamQuery() { TeamId = teamId }));
+            return Ok(await _mediator.Send(new GetProfilePictureDancerQuery() { DancerId = teamId }));
         }
 
         /// <summary>
@@ -93,9 +86,9 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Create)]
+        [Authorize(Policy = Permissions.Dancers.Create)]
         [HttpPost("updateProfilePicture")]
-        public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureTeamCommand command)
+        public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureDancerCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
@@ -105,9 +98,9 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Create)]
-        [HttpPost("addTeamMember")]
-        public async Task<IActionResult> AddTeamMember(AddTeamMemberCommand command)
+        [Authorize(Policy = Permissions.Dancers.Create)]
+        [HttpPost("addDancerMember")]
+        public async Task<IActionResult> AddDancerMember(AddDancerMemberCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
@@ -116,11 +109,11 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns>Status 200 OK </returns>
-        [HttpGet("getTeamMembers/{teamId}")]
+        [HttpGet("getDancerMembers/{teamId}")]
         [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Client, Duration = 60)]
-        public async Task<IActionResult> GetTeamMembersAsync(int teamId)
+        public async Task<IActionResult> GetDancerMembersAsync(int teamId)
         {
-            return Ok(await _mediator.Send(new GetTeamMembersQuery() { TeamId = teamId }));
-        }
+            return Ok(await _mediator.Send(new GetDancerMembersQuery() { DancerId = teamId }));
+        }*/
     }
 }

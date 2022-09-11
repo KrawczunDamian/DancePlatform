@@ -1,0 +1,31 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddTeamMemberModal> _localizer
+
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+            @_localizer["Add Member"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudGrid>
+            @*<MudItem xs="12" md="6">
+            <MudTextField Disabled For="@(() => AddTeamMemberModel.TeamId)" @bind-Value="AddTeamMemberModel.TeamId" Label="@_localizer["TeamId"]" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+            <MudTextField T="int" For="@(() => AddTeamMemberModel.DancerId)" @bind-Value="AddTeamMemberModel.DancerId" Label="@_localizer["DancerId"]" />
+            </MudItem>*@
+            @foreach (var dancer in _allDancers)
+            {
+                <MudItem xs="3">
+                    @dancer.Nickname
+                </MudItem>
+            }
+        </MudGrid>
+    </DialogContent>
+    <DialogActions>
+        <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+        <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+    </DialogActions>
+</MudDialog>

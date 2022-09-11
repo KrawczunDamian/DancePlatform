@@ -1,5 +1,7 @@
 ﻿using DancePlatform.Domain.Contracts;
+using DancePlatform.Domain.Entities.UserProfile;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DancePlatform.Domain.Entities.Organisations
@@ -16,7 +18,5 @@ namespace DancePlatform.Domain.Entities.Organisations
         public DateTime? CreatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-
-
     }
 }
