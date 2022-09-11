@@ -19,7 +19,8 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         [Inject] private ITeamManager TeamManager { get; set; }
         [Inject] private IDancerManager DancerManager { get; set; }
 
-        [Parameter] public int TeamId { get; set; } = new();
+        [Parameter] public int teamId { get; set; } = new();
+        [Parameter] public List<Dancer> teamsDancers { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -54,7 +55,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            //await GetAllDancersAsync();
+            await GetAllDancersAsync();
             //_loaded = true;
             HubConnection = HubConnection.TryInitialize(_navigationManager);
             if (HubConnection.State == HubConnectionState.Disconnected)

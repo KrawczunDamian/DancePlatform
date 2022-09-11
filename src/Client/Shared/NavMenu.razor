@@ -4,7 +4,7 @@
 <UserCard />
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
-    @if (_canViewHangfire)
+    @*@if (_canViewHangfire)
     {
         <MudNavLink Href="/jobs" Target="_blank" Icon="@Icons.Material.Outlined.Work">
             @_localizer["Hangfire"]
@@ -12,7 +12,7 @@
     }
     <MudNavLink Href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/" Target="_blank" Icon="@Icons.Material.Outlined.ReadMore">
         @_localizer["Quick Start Guide"]
-    </MudNavLink>
+    </MudNavLink>*@
     <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
         @_localizer["Swagger"]
     </MudNavLink>
@@ -32,7 +32,7 @@
             @_localizer["Audit Trails"]
         </MudNavLink>
     }
-    @if (_canViewDocuments || _canViewDocumentTypes)
+    @*@if (_canViewDocuments || _canViewDocumentTypes)
     {
         <MudListSubheader Class="mt-2 mb-n2">@_localizer["Document Management"]</MudListSubheader>
         @if (_canViewDocuments)
@@ -47,7 +47,7 @@
                 @_localizer["Document Types"]
             </MudNavLink>
         }
-    }
+    }*@
 
     @if (_canViewUsers || _canViewRoles)
     {
@@ -73,7 +73,7 @@
     @if (_canViewProducts || _canViewBrands || _canViewTeams)
     {
         <MudListSubheader Class="mt-2 mb-n2">@_localizer["Catalog Management"]</MudListSubheader>
-        @if (_canViewProducts)
+        @*@if (_canViewProducts)
         {
             <MudNavLink Href="/catalog/products" Icon="@Icons.Material.Outlined.CallToAction">
                 @_localizer["Products"]
@@ -84,7 +84,7 @@
             <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
                 @_localizer["Brands"]
             </MudNavLink>
-        }
+        }*@
         @if (_canViewTeams)
         {
             <MudNavLink Href="/organisations/teams" Icon="@Icons.Material.Outlined.CallToAction">

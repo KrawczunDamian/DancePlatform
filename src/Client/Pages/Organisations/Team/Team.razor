@@ -79,7 +79,7 @@ else
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
                         <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">Members@*LOCALIZER*@</MudText>
-                        <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
+                        <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
                         <MudCarousel ItemsSource="_teamMembers" Style="height:200px">
                             <ItemTemplate>
                                 <div class="d-flex flex-column flex-column justify-center" style="height:100%">

@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public string Nickname { get; set; }
         public int Height { get; set; }
-        public int Wieght { get; set; }
+        public int Weight { get; set; }
     }
 }

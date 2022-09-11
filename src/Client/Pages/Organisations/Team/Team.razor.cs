@@ -1,11 +1,7 @@
-﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
-using DancePlatform.Application.Features.Teams.Commands.AddMember;
-using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
-using DancePlatform.Application.Features.Teams.Queries.GetAll;
+﻿using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
-using DancePlatform.Client.Infrastructure.Managers.UserProfile;
 using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
@@ -127,36 +123,16 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 }
             }
         }
-        private async Task AddMember(int id = 0)
+        private async Task AddMember()
         {
-            /*var parameters = new DialogParameters();
-            if(_team != null)
+            var parameters = new DialogParameters()
             {
-                parameters.Add(nameof(AddTeamMemberModal),_team.Id);
-            }
+                ["teamId"] = _team.Id,
+                ["teamsDancers"] = _teamMembers
+                };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
-            var result = await dialog.Result;*/
-            var parameters = new DialogParameters();
-            if (_team.Id != 0)
-            {
-                if (_team != null)
-                {
-                    parameters.Add(nameof(AddEditTeamModal), new AddEditTeamCommand
-                    {
-                        Id = _team.Id,
-                        Name = _team.Name,
-                        Description = _team.Description
-                    });
-                }
-            }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditTeamModal>(_team.Id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                await Reset();
-            }
         }
         private async Task Reset()
         {

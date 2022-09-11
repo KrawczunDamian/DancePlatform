@@ -20,12 +20,15 @@
             {
                 <MudItem xs="3">
                     @dancer.Nickname
+                    @if(teamsDancers.Any(x => x.Id == dancer.Id)){
+                        <MudText>TEN JEST NASZ</MudText>
+                    }
                 </MudItem>
             }
         </MudGrid>
     </DialogContent>
     <DialogActions>
         <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
-        <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+        @*<MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>*@
     </DialogActions>
 </MudDialog>
