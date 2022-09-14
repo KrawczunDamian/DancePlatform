@@ -10,7 +10,7 @@ namespace DancePlatform.Client.Infrastructure.Managers.UserProfile
 {
     public interface IDancerManager : IManager
     {
-        Task<IResult<List<GetAllDancersResponse>>> GetAllAsync();
+        Task<IResult<List<GetDancersWithProfileInfoResponse>>> GetAllAsync();
         /*Task<IResult<GetTeamByIdResponse>> GetByIdAsync(int id);
 
         Task<IResult<int>> SaveAsync(AddEditTeamCommand request);

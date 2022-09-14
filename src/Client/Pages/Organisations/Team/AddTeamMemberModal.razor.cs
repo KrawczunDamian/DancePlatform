@@ -20,13 +20,13 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         [Inject] private IDancerManager DancerManager { get; set; }
 
         [Parameter] public int teamId { get; set; } = new();
-        [Parameter] public List<Dancer> teamsDancers { get; set; } = new();
+        [Parameter] public List<GetDancersWithProfileInfoResponse> teamsDancers { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private List<GetAllDancersResponse> _allDancers = new();
+        private List<GetDancersWithProfileInfoResponse> _allDancers = new();
         private bool _loaded;
 
         public void Cancel()

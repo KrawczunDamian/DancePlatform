@@ -1,6 +1,8 @@
-﻿using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
+﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
+using DancePlatform.Client.Infrastructure.Managers.Identity.Account;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Constants.Application;
@@ -21,13 +23,14 @@ namespace DancePlatform.Client.Pages.Organisations.Team
     public partial class Team
     {
         [Inject] private ITeamManager TeamManager { get; set; }
+        [Inject] private IAccountManager AccountManager { get; set; }
 
         [Parameter] public int teamId { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private GetTeamByIdResponse _team = new();
         private char _firstLetterOfName;
-        private List<Dancer> _teamMembers = new();
+        private List<GetDancersWithProfileInfoResponse> _teamMembers = new();
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreateTeams;
@@ -85,7 +88,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             var response = await TeamManager.GetTeamMembersAsync(id);
             if (response.Succeeded)
             {
-                _teamMembers = response.Data;
+                _teamMembers = response.Data;                
             }
             else
             {
@@ -130,6 +133,17 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 ["teamId"] = _team.Id,
                 ["teamsDancers"] = _teamMembers
                 };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
+            var result = await dialog.Result;
+        }
+        private async Task RemoveMember(int Id)
+        {
+            var parameters = new DialogParameters()
+            {
+                ["teamId"] = _team.Id,
+                ["teamsDancers"] = _teamMembers
+            };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
             var result = await dialog.Result;

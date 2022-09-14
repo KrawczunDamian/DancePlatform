@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace DancePlatform.Application.Features.Dancers.Queries.GetAll
 {
-    public class GetAllDancersQuery : IRequest<Result<List<GetAllDancersResponse>>>
+    public class GetAllDancersQuery : IRequest<Result<List<GetDancersWithProfileInfoResponse>>>
     {
         public GetAllDancersQuery()
         {
         }
     }
 
-    internal class GetAllDancersCachedQueryHandler : IRequestHandler<GetAllDancersQuery, Result<List<GetAllDancersResponse>>>
+    internal class GetAllDancersCachedQueryHandler : IRequestHandler<GetAllDancersQuery, Result<List<GetDancersWithProfileInfoResponse>>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IMapper _mapper;
@@ -33,12 +33,12 @@ namespace DancePlatform.Application.Features.Dancers.Queries.GetAll
             _cache = cache;
         }
 
-        public async Task<Result<List<GetAllDancersResponse>>> Handle(GetAllDancersQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<GetDancersWithProfileInfoResponse>>> Handle(GetAllDancersQuery request, CancellationToken cancellationToken)
         {
             Func<Task<List<Dancer>>> getAllDancers = () => _unitOfWork.Repository<Dancer>().GetAllAsync();
             var dancerList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllDancersCacheKey, getAllDancers);
-            var mappedDancers = _mapper.Map<List<GetAllDancersResponse>>(dancerList);
-            return await Result<List<GetAllDancersResponse>>.SuccessAsync(mappedDancers);
+            var mappedDancers = _mapper.Map<List<GetDancersWithProfileInfoResponse>>(dancerList);
+            return await Result<List<GetDancersWithProfileInfoResponse>>.SuccessAsync(mappedDancers);
         }
     }
 }

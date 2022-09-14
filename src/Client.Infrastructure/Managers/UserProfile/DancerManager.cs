@@ -30,10 +30,10 @@ namespace DancePlatform.Client.Infrastructure.Managers.UserProfile
             return await response.ToResult<int>();
         }*/
 
-        public async Task<IResult<List<GetAllDancersResponse>>> GetAllAsync()
+        public async Task<IResult<List<GetDancersWithProfileInfoResponse>>> GetAllAsync()
         {
             var response = await _httpClient.GetAsync(Routes.DancersEndpoints.GetAll);
-            return await response.ToResult<List<GetAllDancersResponse>>();
+            return await response.ToResult<List<GetDancersWithProfileInfoResponse>>();
         }
         /*public async Task<IResult<GetDancerByIdResponse>> GetByIdAsync(int id)
         {

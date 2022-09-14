@@ -8,7 +8,7 @@ namespace DancePlatform.Application.Mappings
     {
         public DancerProfile()
         {
-            CreateMap<GetAllDancersResponse, Dancer>().ReverseMap();
+            CreateMap<GetDancersWithProfileInfoResponse, Dancer>().ReverseMap();
         }
     }
 }

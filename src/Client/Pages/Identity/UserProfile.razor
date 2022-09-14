@@ -2,7 +2,7 @@
 @using DancePlatform.Shared.Constants.Role
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserProfile> _localizer
 
-<HeroTitle Title="@Title" Description="@Description" />
+<BigTitle Title="@Title" Description="@Description" />
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />

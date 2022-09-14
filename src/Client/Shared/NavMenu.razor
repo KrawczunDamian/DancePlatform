@@ -4,15 +4,6 @@
 <UserCard />
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
-    @*@if (_canViewHangfire)
-    {
-        <MudNavLink Href="/jobs" Target="_blank" Icon="@Icons.Material.Outlined.Work">
-            @_localizer["Hangfire"]
-        </MudNavLink>
-    }
-    <MudNavLink Href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/" Target="_blank" Icon="@Icons.Material.Outlined.ReadMore">
-        @_localizer["Quick Start Guide"]
-    </MudNavLink>*@
     <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
         @_localizer["Swagger"]
     </MudNavLink>
@@ -32,22 +23,6 @@
             @_localizer["Audit Trails"]
         </MudNavLink>
     }
-    @*@if (_canViewDocuments || _canViewDocumentTypes)
-    {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Document Management"]</MudListSubheader>
-        @if (_canViewDocuments)
-        {
-            <MudNavLink Href="/document-store" Icon="@Icons.Material.Outlined.AttachFile">
-                @_localizer["Document Store"]
-            </MudNavLink>
-        }
-        @if (_canViewDocumentTypes)
-        {
-            <MudNavLink Href="/document-types" Icon="@Icons.Material.Outlined.FileCopy">
-                @_localizer["Document Types"]
-            </MudNavLink>
-        }
-    }*@
 
     @if (_canViewUsers || _canViewRoles)
     {
@@ -70,21 +45,9 @@
             @_localizer["Chat"]
         </MudNavLink>
     }
-    @if (_canViewProducts || _canViewBrands || _canViewTeams)
+    @if (_canViewTeams)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Catalog Management"]</MudListSubheader>
-        @*@if (_canViewProducts)
-        {
-            <MudNavLink Href="/catalog/products" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Products"]
-            </MudNavLink>
-        }
-        @if (_canViewBrands)
-        {
-            <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Brands"]
-            </MudNavLink>
-        }*@
+        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Organisations"]</MudListSubheader>
         @if (_canViewTeams)
         {
             <MudNavLink Href="/organisations/teams" Icon="@Icons.Material.Outlined.CallToAction">
@@ -99,14 +62,10 @@
 
     private bool _canViewHangfire;
     private bool _canViewDashboards;
-    private bool _canViewDocuments;
-    private bool _canViewDocumentTypes;
     private bool _canViewAuditTrails;
     private bool _canViewRoles;
     private bool _canViewUsers;
     private bool _canViewChat;
-    private bool _canViewProducts;
-    private bool _canViewBrands;
     private bool _canViewTeams;
 
     protected override async Task OnParametersSetAsync()
@@ -114,14 +73,10 @@
         _authenticationStateProviderUser = await _stateProvider.GetAuthenticationStateProviderUserAsync();
         _canViewHangfire = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Hangfire.View)).Succeeded;
         _canViewDashboards = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Dashboards.View)).Succeeded;
-        _canViewDocuments = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Documents.View)).Succeeded;
-        _canViewDocumentTypes = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.DocumentTypes.View)).Succeeded;
         _canViewAuditTrails = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.AuditTrails.View)).Succeeded;
         _canViewRoles = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Roles.View)).Succeeded;
         _canViewUsers = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Users.View)).Succeeded;
         _canViewChat = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Communication.Chat)).Succeeded;
-        _canViewProducts = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Products.View)).Succeeded;
-        _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded;
         _canViewTeams = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Teams.View)).Succeeded;
     }
 }

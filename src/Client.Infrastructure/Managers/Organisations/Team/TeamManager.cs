@@ -68,10 +68,10 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
             var response = await _httpClient.PostAsJsonAsync(Routes.TeamsEndpoints.AddTeamMember, request);
             return await response.ToResult<int>();
         }
-        public async Task<IResult<List<Dancer>>> GetTeamMembersAsync(int teamId)
+        public async Task<IResult<List<GetDancersWithProfileInfoResponse>>> GetTeamMembersAsync(int teamId)
         {
             var response = await _httpClient.GetAsync($"{Routes.TeamsEndpoints.GetTeamMembers}/{teamId}");
-            return await response.ToResult<List<Dancer>>();
+            return await response.ToResult<List<GetDancersWithProfileInfoResponse>>();
         }
     }
 }

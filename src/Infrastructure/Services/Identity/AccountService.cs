@@ -1,13 +1,15 @@
-﻿using DancePlatform.Application.Interfaces.Services;
+﻿using AutoMapper;
+using DancePlatform.Application.Interfaces.Services;
 using DancePlatform.Application.Interfaces.Services.Account;
-using DancePlatform.Infrastructure.Models.Identity;
 using DancePlatform.Application.Requests.Identity;
+using DancePlatform.Infrastructure.Models.Identity;
+using DancePlatform.Shared.Models;
 using DancePlatform.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DancePlatform.Infrastructure.Services.Identity
 {
@@ -17,17 +19,20 @@ namespace DancePlatform.Infrastructure.Services.Identity
         private readonly SignInManager<BlazorHeroUser> _signInManager;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AccountService> _localizer;
+        private readonly IMapper _mapper;
 
         public AccountService(
             UserManager<BlazorHeroUser> userManager,
             SignInManager<BlazorHeroUser> signInManager,
             IUploadService uploadService,
-            IStringLocalizer<AccountService> localizer)
+            IStringLocalizer<AccountService> localizer,
+            IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _uploadService = uploadService;
             _localizer = localizer;
+            _mapper = mapper;
         }
 
         public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId)
@@ -93,7 +98,23 @@ namespace DancePlatform.Infrastructure.Services.Identity
             }
             return await Result<string>.SuccessAsync(data: user.ProfilePictureDataUrl);
         }
-
+        public async Task<IResult<User>> GetUserProfileInfo(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return await Result<User>.FailAsync(_localizer["User Not Found"]);
+            }
+            var userResult = new User()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ProfilePictureDataUrl = user.ProfilePictureDataUrl,
+                IsDeleted = user.IsDeleted,
+            };
+            return await Result<User>.SuccessAsync(data: userResult);
+        }
         public async Task<IResult<string>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);

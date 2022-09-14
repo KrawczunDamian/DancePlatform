@@ -3,12 +3,6 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Teams> _localizer
 @using DancePlatform.Application.Features.Teams.Queries.GetById
 
-<style>
-    .mud-table-container {
-        overflow: auto;
-    }
-</style>
-
 
 @if (!_loaded)
 {
@@ -25,9 +19,8 @@ else
                         <div class="d-flex justify-center" style="width:100%">
                             @if (!string.IsNullOrEmpty(@ImageDataUrl))
                             {
-                                @*<MudAvatar Image="@ImageDataUrl" Style="max-width:100%;height=auto"> </MudAvatar>*@
-                                <div class="mud-avatar mud-avatar-filled mud-avatar-filled-default" style="max-width:100%;height:auto">
-                                    <img src="Files\Images\TeamProfilePictures\1-d47087bf-4884-4593-820b-2968c858d6f0.png" class="mud-avatar-img">
+                                <div class="mud-avatar mud-avatar-filled mud-avatar-filled-default" style="max-width:100%;height:auto;aspect-ratio:1/1">
+                                    <img src="@ImageDataUrl" class="mud-avatar-img">
                                 </div>
                             }
                             else
@@ -73,27 +66,46 @@ else
             <MudItem xs="8">
                 <MudPaper Square="true">
                     <MudPaper Class="pa-2" Square="true">
-                        <MudText Typo="Typo.h4" Color="Color.Primary">Photos@*LOCALIZER*@</MudText>
+                        <MudText Typo="Typo.h4" Color="Color.Primary">@_localizer["Photos"]</MudText>
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
-                        <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">Members@*LOCALIZER*@</MudText>
+                        <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">@_localizer["Members"]</MudText>
                         <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
                         <MudDivider></MudDivider>
-                        @if(_teamMembers.Count > 0)
+                        @if (_teamMembers.Count > 0)
                         {
-                        <MudCarousel ItemsSource="_teamMembers" Style="height:200px">
-                            <ItemTemplate>
-                                <div class="d-flex flex-column flex-column justify-center" style="height:100%">
-                                    <MudText Align="@Align.Center" Class="mx-auto">@context.Nickname</MudText>
-                                </div>
-                            </ItemTemplate>
-                        </MudCarousel>
+                            <MudGrid>
+                                @foreach (var member in _teamMembers)
+                                {
+                                    <MudItem>
+                                        <MudCard>
+                                            <MudCardContent>
+                                                <div class="d-flex justify-center">
+                                                    @if (!string.IsNullOrEmpty(member.ProfilePictureDataUrl))
+                                                    {
+                                                        <MudAvatar Image="@member.ProfilePictureDataUrl" Style="height:75px; width:75px;"> </MudAvatar>
+                                                    }
+                                                    else
+                                                    {
+                                                        <MudAvatar Color="Color.Secondary" Style="height:75px; width:75px;">@member.FirstName[0]</MudAvatar>
+                                                    }
+                                                </div>
+                                                <MudText>@member.FirstName @member.Nickname @member.LastName</MudText>
+                                                <div class="d-flex justify-center">
+                                                    <MudIconButton OnClick="@((e) => RemoveMember(member.Id))" Icon="@Icons.Material.Filled.Block" Color="Color.Error"></MudIconButton>
+                                                </div>
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </MudItem>
+                                }
+                            </MudGrid>
                         }
-                        else{
-                            
+                        else
+                        {
+
                             <MudGrid Class="align-center">
                                 <MudItem>
-                            <MiniTitle Title="@_localizer["No Members"]"/>
+                                    <MiniTitle Title="@_localizer["No Members"]" />
                                 </MudItem>
                             </MudGrid>
                         }
