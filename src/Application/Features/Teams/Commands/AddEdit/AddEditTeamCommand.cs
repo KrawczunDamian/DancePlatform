@@ -22,6 +22,8 @@ namespace DancePlatform.Application.Features.Teams.Commands.AddEdit
         public string Country { get; set; }
         [Required]
         public string City { get; set; }
+        [Phone]
+        public string PhoneNumber { get; set; }
     }
 
     internal class AddEditTeamCommandHandler : IRequestHandler<AddEditTeamCommand, Result<int>>
@@ -55,6 +57,7 @@ namespace DancePlatform.Application.Features.Teams.Commands.AddEdit
                     team.Description = command.Description ?? team.Description;
                     team.Country = command.Country ?? team.Country;
                     team.City = command.City ?? team.City;
+                    team.PhoneNumber = command.PhoneNumber ?? team.PhoneNumber;
                     await _unitOfWork.Repository<Team>().UpdateAsync(team);
                     await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamsCacheKey);
                     return await Result<int>.SuccessAsync(team.Id, _localizer["Team Updated"]);

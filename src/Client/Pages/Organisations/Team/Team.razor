@@ -18,18 +18,22 @@ else
 {
     <MudContainer Fixed="true">
         <MudGrid Spacing="0">
-            <MudItem xs="3">
+            <MudItem xs="3" Style="max-width:200px">
                 <MudPaper Class="pa-2 justify-center" Square="true"><BigTitle Title="@_localizer["Team"]" /></MudPaper>
                 <MudPaper Class="pa-2" Square="true">
                     <MudContainer Class="pa-2">
-                        <div class="d-flex justify-center">
+                        <div class="d-flex justify-center" style="width:100%">
                             @if (!string.IsNullOrEmpty(@ImageDataUrl))
                             {
-                                <MudAvatar Image="@ImageDataUrl" Style="height:250px; width:250px;"> </MudAvatar>
+                                @*<MudAvatar Image="@ImageDataUrl" Style="max-width:100%;height=auto"> </MudAvatar>*@
+                                <div class="mud-avatar mud-avatar-filled mud-avatar-filled-default" style="max-width:100%;height:auto">
+                                    <img src="Files\Images\TeamProfilePictures\1-d47087bf-4884-4593-820b-2968c858d6f0.png" class="mud-avatar-img">
+                                </div>
                             }
                             else
                             {
-                                <MudAvatar Color="Color.Secondary" Style="height:250px; width:250px;">@_firstLetterOfName</MudAvatar>
+
+                                <MudAvatar Color="Color.Secondary" Style="max-width:100%;width:400px;height:unset;aspect-ratio:1/1">@_firstLetterOfName</MudAvatar>
                             }
                         </div>
                         <MudText Class="d-flex justify-center ma-2" Style="font-weight:bold">@_team.Name</MudText>
@@ -69,17 +73,14 @@ else
             <MudItem xs="8">
                 <MudPaper Square="true">
                     <MudPaper Class="pa-2" Square="true">
-                        <MudText Typo="Typo.h4" Color="Color.Primary">Posts@*LOCALIZER*@</MudText>
-                    </MudPaper>
-                    <MudPaper Class="pa-2" Square="true">
-                        <MudText Typo="Typo.h4" Color="Color.Primary">Events@*LOCALIZER*@</MudText>
-                    </MudPaper>
-                    <MudPaper Class="pa-2" Square="true">
                         <MudText Typo="Typo.h4" Color="Color.Primary">Photos@*LOCALIZER*@</MudText>
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
                         <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">Members@*LOCALIZER*@</MudText>
                         <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
+                        <MudDivider></MudDivider>
+                        @if(_teamMembers.Count > 0)
+                        {
                         <MudCarousel ItemsSource="_teamMembers" Style="height:200px">
                             <ItemTemplate>
                                 <div class="d-flex flex-column flex-column justify-center" style="height:100%">
@@ -87,6 +88,15 @@ else
                                 </div>
                             </ItemTemplate>
                         </MudCarousel>
+                        }
+                        else{
+                            
+                            <MudGrid Class="align-center">
+                                <MudItem>
+                            <MiniTitle Title="@_localizer["No Members"]"/>
+                                </MudItem>
+                            </MudGrid>
+                        }
                     </MudPaper>
                 </MudPaper>
             </MudItem>
