@@ -25,5 +25,6 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
         Task<IResult<int>> UpdateProfilePictureAsync(UpdateProfilePictureTeamCommand request);
         Task<IResult<int>> AddTeamMemberAsync(AddTeamMemberCommand request);
         Task<IResult<List<GetDancersWithProfileInfoResponse>>> GetTeamMembersAsync(int teamId);
+        Task<IResult<int>> RemoveMemberAsync(int teamId, int dancerId);
     }
 }

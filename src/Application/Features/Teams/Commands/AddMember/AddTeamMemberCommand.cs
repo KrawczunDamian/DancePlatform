@@ -7,6 +7,7 @@ using DancePlatform.Shared.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Localization;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,7 +36,8 @@ namespace DancePlatform.Application.Features.Teams.Commands.AddMember
         {
             var team = await _unitOfWork.Repository<Team>().GetByIdAsync(command.TeamId);
             var dancer = await _unitOfWork.Repository<Dancer>().GetByIdAsync(command.DancerId);
-            if (team != null && dancer != null)
+            var allTeamDancers = await _unitOfWork.Repository<TeamDancer>().GetAllAsync();
+            if (team != null && dancer != null && !allTeamDancers.Any(x => x.DancerId == dancer.Id && x.TeamId == team.Id && x.IsDeleted != true))
             {
                 var teamMember = new TeamDancer()
                 {

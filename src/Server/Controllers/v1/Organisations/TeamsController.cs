@@ -122,5 +122,17 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         {
             return Ok(await _mediator.Send(new GetTeamMembersQuery() { TeamId = teamId }));
         }
+        /// <summary>
+        /// Remove a member
+        /// </summary>
+        /// <param name="dancerId"></param>
+        /// <param name="teamId"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Edit)]
+        [HttpDelete("removeMember/{teamId}/{dancerId}")]
+        public async Task<IActionResult> RemoveMemberAsync(int teamId, int dancerId)
+        {
+            return Ok(await _mediator.Send(new RemoveTeamMemberCommand { DancerId = dancerId, TeamId = teamId }));
+        }
     }
 }

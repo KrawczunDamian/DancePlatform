@@ -72,9 +72,9 @@ else
                         <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">@_localizer["Members"]</MudText>
                         <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
                         <MudDivider></MudDivider>
-                        @if (_teamMembers.Count > 0)
-                        {
-                            <MudGrid>
+                        <MudGrid>
+                            @if (_teamMembers.Count > 0)
+                            {
                                 @foreach (var member in _teamMembers)
                                 {
                                     <MudItem>
@@ -98,17 +98,14 @@ else
                                         </MudCard>
                                     </MudItem>
                                 }
-                            </MudGrid>
-                        }
-                        else
-                        {
-
-                            <MudGrid Class="align-center">
+                            }
+                            else
+                            {
                                 <MudItem>
                                     <MiniTitle Title="@_localizer["No Members"]" />
                                 </MudItem>
-                            </MudGrid>
-                        }
+                            }
+                        </MudGrid>
                     </MudPaper>
                 </MudPaper>
             </MudItem>

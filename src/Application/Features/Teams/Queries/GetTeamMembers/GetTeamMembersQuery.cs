@@ -55,10 +55,10 @@ namespace DancePlatform.Application.Features.Teams.Queries.GetProfilePicture
                         Nickname = dancer.Nickname,
                         Height = dancer.Height,
                         Weight = dancer.Weight,
-                        CreatedById = dancer.CreatedBy,
+                        CreatedBy = dancer.CreatedBy,
                         FirstName = dancerProfileInfo.Data.FirstName,
                         LastName = dancerProfileInfo.Data.LastName,
-                        ProfilePictureDataUrl = dancerProfileInfo.Data.ProfilePictureDataUrl
+                        ProfilePictureDataUrl = dancerProfileInfo.Data.ProfilePictureDataUrl ?? string.Empty,
                     };
                     if (dancer.IsDeleted != true)
                     {

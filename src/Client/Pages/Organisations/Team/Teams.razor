@@ -27,7 +27,7 @@
 }
 else
 {
-    <MudTable Hover="true" Elevation="25" Items="_teamList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<GetAllTeamsResponse, bool>(Search)" @bind-team="_team" @ref="_teamsTable">
+    <MudTable Hover="true" Elevation="25" Items="_teamList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<GetAllTeamsResponse, bool>(Search)" @bind-team="_team">
         <ToolBarContent>
             <BigTitle Title="@_localizer["Teams"]"/>
             <div class="justify-center mud-text-align-center ml-4">
@@ -57,7 +57,6 @@ else
         <RowTemplate>
             <MudTd DataLabel="Name">
                 <MudNavLink Href="@($"/organisations/team/{context.Id}")" Tag="@context.Id">
-                @*<MudNavLink Href="@($"/organisations/team")" Tag="@context.Id">*@
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
                 </MudNavLink>
             </MudTd>

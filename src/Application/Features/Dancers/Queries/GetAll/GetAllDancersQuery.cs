@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using DancePlatform.Application.Interfaces.Repositories;
-using DancePlatform.Domain.Entities.Organisations;
+using DancePlatform.Application.Interfaces.Services.Account;
 using DancePlatform.Domain.Entities.UserProfile;
-using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Wrapper;
-using LazyCache;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,21 +22,40 @@ namespace DancePlatform.Application.Features.Dancers.Queries.GetAll
     {
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IAppCache _cache;
+        private readonly IAccountService _accountService;
 
-        public GetAllDancersCachedQueryHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IAppCache cache)
+        public GetAllDancersCachedQueryHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IAccountService accountService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _cache = cache;
+            _accountService = accountService;
         }
 
         public async Task<Result<List<GetDancersWithProfileInfoResponse>>> Handle(GetAllDancersQuery request, CancellationToken cancellationToken)
         {
-            Func<Task<List<Dancer>>> getAllDancers = () => _unitOfWork.Repository<Dancer>().GetAllAsync();
-            var dancerList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllDancersCacheKey, getAllDancers);
-            var mappedDancers = _mapper.Map<List<GetDancersWithProfileInfoResponse>>(dancerList);
-            return await Result<List<GetDancersWithProfileInfoResponse>>.SuccessAsync(mappedDancers);
+            var allDancers = await _unitOfWork.Repository<Dancer>().GetAllAsync();
+            var dancerList = new List<GetDancersWithProfileInfoResponse>();
+
+            foreach (var dancer in allDancers)
+            {
+                var dancerProfileInfo = await _accountService.GetUserProfileInfo(dancer.CreatedBy);
+                var dancerWithProfileInfo = new GetDancersWithProfileInfoResponse()
+                {
+                    Id = dancer.Id,
+                    Nickname = dancer.Nickname,
+                    Height = dancer.Height,
+                    Weight = dancer.Weight,
+                    CreatedBy = dancer.CreatedBy,
+                    FirstName = dancerProfileInfo.Data.FirstName,
+                    LastName = dancerProfileInfo.Data.LastName,
+                    ProfilePictureDataUrl = dancerProfileInfo.Data.ProfilePictureDataUrl ?? string.Empty,
+                };
+                if (dancer.IsDeleted != true)
+                {
+                    dancerList.Add(dancerWithProfileInfo);
+                }
+            }
+            return await Result<List<GetDancersWithProfileInfoResponse>>.SuccessAsync(dancerList);
         }
     }
 }

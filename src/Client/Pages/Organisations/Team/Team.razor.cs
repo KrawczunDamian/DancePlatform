@@ -4,7 +4,6 @@ using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Identity.Account;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
-using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -88,7 +87,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             var response = await TeamManager.GetTeamMembersAsync(id);
             if (response.Succeeded)
             {
-                _teamMembers = response.Data;                
+                _teamMembers = response.Data;
             }
             else
             {
@@ -98,59 +97,56 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 }
             }
         }
-
-        private async Task Delete(int id)
-        {
-            string deleteContent = _localizer["Delete Content"];
-            var parameters = new DialogParameters
-            {
-                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
-            };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                var response = await TeamManager.DeleteAsync(id);
-                if (response.Succeeded)
-                {
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-                    _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
-                }
-            }
-        }
         private async Task AddMember()
         {
             var parameters = new DialogParameters()
             {
                 ["teamId"] = _team.Id,
                 ["teamsDancers"] = _teamMembers
-                };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
-            var result = await dialog.Result;
-        }
-        private async Task RemoveMember(int Id)
-        {
-            var parameters = new DialogParameters()
-            {
-                ["teamId"] = _team.Id,
-                ["teamsDancers"] = _teamMembers
             };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
             var result = await dialog.Result;
+            await Reset();
+        }
+        private async Task RemoveMember(int dancerId)
+        {
+            string deleteContent = _localizer["Remove Member"];
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, dancerId)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Remove"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var response = await TeamManager.RemoveMemberAsync(_team.Id, dancerId);
+                if (response.Succeeded)
+                {
+                    await Reset();
+                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+
+                }
+                else
+                {
+                    await Reset();
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
+
+            }
         }
         private async Task Reset()
         {
-            await GetTeamMembersAsync();
+            _teamMembers = new List<GetDancersWithProfileInfoResponse>();
+            _team = new GetTeamByIdResponse();
+            await GetTeamAsync(teamId);
+            await GetTeamMembersAsync(teamId);
+            
         }
         private IBrowserFile _file;
 

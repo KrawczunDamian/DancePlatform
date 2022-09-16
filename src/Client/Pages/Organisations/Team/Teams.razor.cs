@@ -38,8 +38,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private bool _canSearchTeams;
         private bool _loaded;
 
-        private MudTable<GetAllTeamsResponse> _teamsTable;
-
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();
@@ -157,7 +155,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         }
 
         private async Task Reset()
-        {
+        {            
             _team = new GetAllTeamsResponse();
             await GetTeamsAsync();
         }

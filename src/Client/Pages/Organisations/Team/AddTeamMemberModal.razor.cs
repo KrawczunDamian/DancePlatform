@@ -1,10 +1,10 @@
 ﻿using Blazored.FluentValidation;
 using DancePlatform.Application.Features.Dancers.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Commands.AddMember;
+using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Client.Infrastructure.Managers.UserProfile;
-using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -34,23 +34,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             MudDialog.Cancel();
         }
 
-        /*private async Task SaveAsync()
-        {
-            var response = await TeamManager.SaveAsync();
-            if (response.Succeeded)
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                MudDialog.Close();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-        }*/
 
         protected override async Task OnInitializedAsync()
         {
@@ -82,6 +65,69 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                     _snackBar.Add(message, Severity.Error);
                 }
             }
+        }
+        private async Task RemoveMember(int dancerId)
+        {
+            string deleteContent = _localizer["Remove Member"];
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, dancerId)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Remove"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var response = await TeamManager.RemoveMemberAsync(teamId, dancerId);
+                if (response.Succeeded)
+                {
+                    await Reset();
+                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+                }
+                else
+                {
+                    await Reset();
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
+
+            }
+        }
+        private async Task AddMember(int dancerId)
+        {
+            var command = new AddTeamMemberCommand()
+            {
+                DancerId = dancerId,
+                TeamId = teamId
+            };
+            var response = await TeamManager.AddTeamMemberAsync(command);
+            if (response.Succeeded)
+            {
+                await Reset();
+                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                _snackBar.Add(response.Messages[0], Severity.Success);
+            }
+            else
+            {
+                await Reset();
+                foreach (var message in response.Messages)
+                {
+                    _snackBar.Add(message, Severity.Error);
+                }
+            }
+        }
+        private async Task Reset()
+        {
+            InvokeAsync(async () =>
+            {
+                _allDancers.Clear();
+                await GetAllDancersAsync();
+                StateHasChanged();
+            });
+            
         }
     }
 }

@@ -73,5 +73,10 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
             var response = await _httpClient.GetAsync($"{Routes.TeamsEndpoints.GetTeamMembers}/{teamId}");
             return await response.ToResult<List<GetDancersWithProfileInfoResponse>>();
         }
+        public async Task<IResult<int>> RemoveMemberAsync(int teamId, int dancerId)
+        {
+            var response = await _httpClient.DeleteAsync($"{Routes.TeamsEndpoints.RemoveMember}/{teamId}/{dancerId}");
+            return await response.ToResult<int>();
+        }
     }
 }

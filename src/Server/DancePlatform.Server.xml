@@ -364,6 +364,14 @@
             <param name="teamId"></param>
             <returns>Status 200 OK </returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.RemoveMemberAsync(System.Int32,System.Int32)">
+            <summary>
+            Remove a member
+            </summary>
+            <param name="dancerId"></param>
+            <param name="teamId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:DancePlatform.Server.Controllers.v1.UserProfile.DancersController.GetAll">
             <summary>
             Get All Dancers
