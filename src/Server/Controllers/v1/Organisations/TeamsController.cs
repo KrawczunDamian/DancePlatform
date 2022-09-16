@@ -1,4 +1,5 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.AddMember;
 using DancePlatform.Application.Features.Teams.Commands.Delete;
 using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.Export;
@@ -97,6 +98,41 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureTeamCommand command)
         {
             return Ok(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Add a member to team
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Create)]
+        [HttpPost("addTeamMember")]
+        public async Task<IActionResult> AddTeamMember(AddTeamMemberCommand command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+        /// <summary>
+        /// Get team's members
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns>Status 200 OK </returns>
+        [HttpGet("getTeamMembers/{teamId}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Client, Duration = 60)]
+        public async Task<IActionResult> GetTeamMembersAsync(int teamId)
+        {
+            return Ok(await _mediator.Send(new GetTeamMembersQuery() { TeamId = teamId }));
+        }
+        /// <summary>
+        /// Remove a member
+        /// </summary>
+        /// <param name="dancerId"></param>
+        /// <param name="teamId"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Edit)]
+        [HttpDelete("removeMember/{teamId}/{dancerId}")]
+        public async Task<IActionResult> RemoveMemberAsync(int teamId, int dancerId)
+        {
+            return Ok(await _mediator.Send(new RemoveTeamMemberCommand { DancerId = dancerId, TeamId = teamId }));
         }
     }
 }

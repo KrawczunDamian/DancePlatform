@@ -1,8 +1,11 @@
-﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Commands.AddEdit;
+using DancePlatform.Application.Features.Teams.Commands.AddMember;
 using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Infrastructure.Extensions;
+using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -58,6 +61,21 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
         public async Task<IResult<int>> UpdateProfilePictureAsync(UpdateProfilePictureTeamCommand request)
         {
             var response = await _httpClient.PostAsJsonAsync(Routes.TeamsEndpoints.UpdateProfilePicture, request);
+            return await response.ToResult<int>();
+        }
+        public async Task<IResult<int>> AddTeamMemberAsync(AddTeamMemberCommand request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(Routes.TeamsEndpoints.AddTeamMember, request);
+            return await response.ToResult<int>();
+        }
+        public async Task<IResult<List<GetDancersWithProfileInfoResponse>>> GetTeamMembersAsync(int teamId)
+        {
+            var response = await _httpClient.GetAsync($"{Routes.TeamsEndpoints.GetTeamMembers}/{teamId}");
+            return await response.ToResult<List<GetDancersWithProfileInfoResponse>>();
+        }
+        public async Task<IResult<int>> RemoveMemberAsync(int teamId, int dancerId)
+        {
+            var response = await _httpClient.DeleteAsync($"{Routes.TeamsEndpoints.RemoveMember}/{teamId}/{dancerId}");
             return await response.ToResult<int>();
         }
     }

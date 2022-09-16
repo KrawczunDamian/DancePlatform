@@ -9,6 +9,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DancePlatform.Domain.Entities.Organisations;
+using DancePlatform.Domain.Entities.UserProfile;
+using DancePlatform.Domain.Entities.General;
+using DancePlatform.Domain.Entities.Relations;
 
 namespace DancePlatform.Infrastructure.Contexts
 {
@@ -29,6 +32,9 @@ namespace DancePlatform.Infrastructure.Contexts
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Federation> Federations { get; set; }
+        public DbSet<Dancer> Dancers { get; set; }
+        public DbSet<DanceStyle> DanceStyles { get; set; }
+        public DbSet<TeamDancer> TeamDancers { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

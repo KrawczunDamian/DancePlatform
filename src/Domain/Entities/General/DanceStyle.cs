@@ -1,6 +1,5 @@
 ﻿using DancePlatform.Domain.Contracts;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DancePlatform.Domain.Entities.General
 {

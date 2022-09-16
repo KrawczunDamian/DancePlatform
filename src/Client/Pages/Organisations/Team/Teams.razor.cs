@@ -6,7 +6,6 @@ using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -38,8 +37,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private bool _canExportTeams;
         private bool _canSearchTeams;
         private bool _loaded;
-
-        private MudTable<GetAllTeamsResponse> _teamsTable;
 
         protected override async Task OnInitializedAsync()
         {
@@ -137,11 +134,14 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 _team = _teamList.FirstOrDefault(c => c.Id == id);
                 if (_team != null)
                 {
-                    parameters.Add(nameof(AddEditTeamModal), new AddEditTeamCommand
+                    parameters.Add(nameof(AddEditTeamModal.AddEditTeamModel), new AddEditTeamCommand
                     {
                         Id = _team.Id,
                         Name = _team.Name,
-                        Description = _team.Description
+                        Description = _team.Description,
+                        Country = _team.Country,
+                        City = _team.City,
+                        PhoneNumber = _team.PhoneNumber
                     });
                 }
             }
@@ -155,7 +155,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         }
 
         private async Task Reset()
-        {
+        {            
             _team = new GetAllTeamsResponse();
             await GetTeamsAsync();
         }
@@ -172,6 +172,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 return true;
             }
             return false;
-        }     
+        }
     }
 }

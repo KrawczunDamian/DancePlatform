@@ -37,6 +37,15 @@ namespace DancePlatform.Shared.Constants.Permission
             public const string Search = "Permissions.Teams.Search";
         }
 
+        public static class Dancers
+        {
+            public const string View = "Permissions.Dancers.View";
+            public const string Create = "Permissions.Dancers.Create";
+            public const string Edit = "Permissions.Dancers.Edit";
+            public const string Delete = "Permissions.Dancers.Delete";
+            public const string Export = "Permissions.Dancers.Export";
+            public const string Search = "Permissions.Dancers.Search";
+        }
         public static class Documents
         {
             public const string View = "Permissions.Documents.View";

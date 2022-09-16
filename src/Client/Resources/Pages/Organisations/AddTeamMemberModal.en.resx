@@ -117,25 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateTime value is required using {0} type!" xml:space="preserve">
-    <value>DateTime value is required using {0} type!</value>
+  <data name="Add Member" xml:space="preserve">
+    <value>Add Member</value>
   </data>
-  <data name="Decimal value is required using {0} type!" xml:space="preserve">
-    <value>Decimal value is required using {0} type!</value>
+  <data name="Add Team" xml:space="preserve">
+    <value>Add Team</value>
   </data>
-  <data name="Entity is required!" xml:space="preserve">
-    <value>Entity is required!</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="Json value is required using {0} type!" xml:space="preserve">
-    <value>Json value is required using {0} type!</value>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
   </data>
-  <data name="Json value must be a valid json string using {0} type!" xml:space="preserve">
-    <value>Json value must be a valid json string using {0} type!</value>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
   </data>
-  <data name="Key is required!" xml:space="preserve">
-    <value>Key is required!</value>
+  <data name="DancerId" xml:space="preserve">
+    <value>Dancer Id</value>
   </data>
-  <data name="Text value is required using {0} type!" xml:space="preserve">
-    <value>Text value is required using {0} type!</value>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Member Added" xml:space="preserve">
+    <value>Membeder Added!</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Tax</value>
+  </data>
+  <data name="Team Saved" xml:space="preserve">
+    <value>Team Saved!</value>
+  </data>
+  <data name="Team Updated" xml:space="preserve">
+    <value>Team Updated!</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Update Team" xml:space="preserve">
+    <value>Update Team</value>
   </data>
 </root>

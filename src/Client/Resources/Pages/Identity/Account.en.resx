@@ -120,6 +120,9 @@
   <data name="Account" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="Dancer" xml:space="preserve">
+    <value>Dancer</value>
+  </data>
   <data name="Manage your account" xml:space="preserve">
     <value>Manage your account</value>
   </data>

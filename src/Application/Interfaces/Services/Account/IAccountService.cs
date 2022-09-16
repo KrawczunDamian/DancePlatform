@@ -1,6 +1,7 @@
 ﻿using DancePlatform.Application.Interfaces.Common;
 using DancePlatform.Application.Requests.Identity;
 using DancePlatform.Application.Requests.Organisations.Team;
+using DancePlatform.Shared.Models;
 using DancePlatform.Shared.Wrapper;
 using System.Threading.Tasks;
 
@@ -15,5 +16,6 @@ namespace DancePlatform.Application.Interfaces.Services.Account
         Task<IResult<string>> GetProfilePictureAsync(string userId);
 
         Task<IResult<string>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId);
+        Task<IResult<User>> GetUserProfileInfo(string userId);
     }
 }

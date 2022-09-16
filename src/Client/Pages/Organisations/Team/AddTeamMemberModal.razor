@@ -1,0 +1,60 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddTeamMemberModal> _localizer
+
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+            @_localizer["Add Member"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (_allDancers.Count > 0)
+        {
+            <MudGrid>
+                @foreach (var dancer in _allDancers)
+                {
+                    <MudItem>
+                        <MudCard>
+                            <MudCardContent>
+                                <div class="d-flex justify-center">
+                                    @if (!string.IsNullOrEmpty(dancer.ProfilePictureDataUrl))
+                                    {
+                                        <MudAvatar Image="@dancer.ProfilePictureDataUrl" Style="height:75px; width:75px;"> </MudAvatar>
+                                    }
+                                    else
+                                    {
+                                        <MudAvatar Color="Color.Secondary" Style="height:75px; width:75px;">@dancer.FirstName[0]</MudAvatar>
+                                    }
+                                </div>
+                                <MudText>@dancer.FirstName @dancer.Nickname @dancer.LastName</MudText>
+                                <div class="d-flex justify-center">
+                                    @if (teamsDancers.Any(x => x.Id == dancer.Id))
+                                    {
+                                        <MudIconButton OnClick="@((e) => RemoveMember(dancer.Id))" Icon="@Icons.Material.Filled.Block" Color="Color.Error"></MudIconButton>
+                                    }
+                                    else{
+                                        <MudIconButton OnClick="@((e) => AddMember(dancer.Id))" Icon="@Icons.Material.Filled.Add" Color="Color.Success"></MudIconButton>
+                                    }
+                                </div>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        }
+        else
+        {
+
+            <MudGrid Class="align-center">
+                <MudItem>
+                    <MiniTitle Title="@_localizer["No Dancers"]" />
+                </MudItem>
+            </MudGrid>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+        @*<MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>*@
+    </DialogActions>
+</MudDialog>
