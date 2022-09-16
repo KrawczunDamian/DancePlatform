@@ -5,7 +5,6 @@ using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Infrastructure.Extensions;
-using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -77,6 +76,16 @@ namespace DancePlatform.Client.Infrastructure.Managers.Organisations.Team
         {
             var response = await _httpClient.DeleteAsync($"{Routes.TeamsEndpoints.RemoveMember}/{teamId}/{dancerId}");
             return await response.ToResult<int>();
+        }
+        public async Task<IResult<int>> UploadTeamPicutreAsync(UploadPictureTeamCommand request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(Routes.TeamsEndpoints.UploadTeamPicture, request);
+            return await response.ToResult<int>();
+        }
+        public async Task<IResult<List<string>>> GetTeamGalleryAsync(int teamId)
+        {
+            var response = await _httpClient.GetAsync($"{Routes.TeamsEndpoints.GetTeamGallery}/{teamId}");
+            return await response.ToResult<List<string>>();
         }
     }
 }

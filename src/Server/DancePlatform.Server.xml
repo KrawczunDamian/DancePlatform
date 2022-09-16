@@ -372,6 +372,20 @@
             <param name="teamId"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.UploadTeamPicture(DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture.UploadPictureTeamCommand)">
+            <summary>
+            Upload picture to team's gallery
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.GetTeamGalleryAsync(System.Int32)">
+            <summary>
+            Get team's gallery
+            </summary>
+            <param name="teamId"></param>
+            <returns>Status 200 OK </returns>
+        </member>
         <member name="M:DancePlatform.Server.Controllers.v1.UserProfile.DancersController.GetAll">
             <summary>
             Get All Dancers

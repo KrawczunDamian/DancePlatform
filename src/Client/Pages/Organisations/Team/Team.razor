@@ -66,12 +66,30 @@ else
             <MudItem xs="8">
                 <MudPaper Square="true">
                     <MudPaper Class="pa-2" Square="true">
-                        <MudText Typo="Typo.h4" Color="Color.Primary">@_localizer["Photos"]</MudText>
-                        <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddPhotos())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Photos"]</MudButton>
-                        <MudDivider></MudDivider>
+                        <div>
+                            <MudText Class="d-inline-block" Typo="Typo.h4" Color="Color.Primary">@_localizer["Photos"]</MudText>
+                            <InputFile id="photoInput" OnChange="AddPhoto" hidden />
+                            <MudButton HtmlTag="label" Style="float:right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface" for="photoInput">@_localizer["Upload Photo"]</MudButton>
+                            <MudDivider></MudDivider>
+                        </div>
+                        @if (_teamGallery.Count > 0)
+                        {
+                            <MudCarousel ItemsSource="@_teamGallery" Style="height:500px" AutoCycle="false">
+                                <ItemTemplate>
+                                <div class="d-flex flex-column flex-column justify-center" style="height:90%">
+                                    <img src="@context" style="max-height:450px;object-fit:scale-down">
+                                </div>
+                            </ItemTemplate>
+                        </MudCarousel>
+                        }
+                        else{
+                            <MudItem>
+                                    <MiniTitle Title="@_localizer["No photos"]" />
+                                </MudItem>
+                        }
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
-                        <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">@_localizer["Members"]</MudText>
+                        <MudText Class="d-inline-block" Typo="Typo.h4" Color="Color.Primary">@_localizer["Members"]</MudText>
                         <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
                         <MudDivider></MudDivider>
                         <MudGrid>

@@ -5,6 +5,7 @@ using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.Export;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
+using DancePlatform.Application.Features.Teams.Queries.GetGallery;
 using DancePlatform.Application.Features.Teams.Queries.GetProfilePicture;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -117,7 +118,6 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// <param name="teamId"></param>
         /// <returns>Status 200 OK </returns>
         [HttpGet("getTeamMembers/{teamId}")]
-        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Client, Duration = 60)]
         public async Task<IActionResult> GetTeamMembersAsync(int teamId)
         {
             return Ok(await _mediator.Send(new GetTeamMembersQuery() { TeamId = teamId }));
@@ -140,10 +140,20 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Teams.Create)]
-        [HttpPost("updateProfilePicture")]
+        [HttpPost("uploadTeamPicture")]
         public async Task<IActionResult> UploadTeamPicture(UploadPictureTeamCommand command)
         {
             return Ok(await _mediator.Send(command));
+        }
+        /// <summary>
+        /// Get team's gallery
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns>Status 200 OK </returns>
+        [HttpGet("getTeamGallery/{teamId}")]        
+        public async Task<IActionResult> GetTeamGalleryAsync(int teamId)
+        {
+            return Ok(await _mediator.Send(new GetTeamGalleryQuery() { TeamId = teamId }));
         }
     }
 }

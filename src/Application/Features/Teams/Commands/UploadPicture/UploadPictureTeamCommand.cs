@@ -5,6 +5,7 @@ using DancePlatform.Application.Interfaces.Services;
 using DancePlatform.Application.Requests;
 using DancePlatform.Application.Requests.Organisations.Team;
 using DancePlatform.Domain.Entities.Organisations;
+using DancePlatform.Domain.Entities.Relations.Photos;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Wrapper;
 using MediatR;
@@ -57,10 +58,14 @@ namespace DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture
                     UploadType = command.UploadType
                 };
                 var filePath = _uploadService.UploadAsync(request);
-                team.ProfilePictureURL = filePath;
-                await _unitOfWork.Repository<Team>().UpdateAsync(team);
-                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamsCacheKey);
-                return await Result<int>.SuccessAsync(team.Id, _localizer["Team Updated"]);
+                var teamPhoto = new TeamPhoto()
+                {
+                    TeamId = team.Id,
+                    PictureURL = filePath,
+                };
+                await _unitOfWork.Repository<TeamPhoto>().AddAsync(teamPhoto);
+                await _unitOfWork.CommitAndRemoveCache(cancellationToken);
+                return await Result<int>.SuccessAsync(team.Id, _localizer["Photo Uploaded"]);
             }
             else
             {

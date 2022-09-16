@@ -36,7 +36,7 @@ namespace DancePlatform.Application.Features.Teams.Commands.Delete
             if (dancerToRemove != null)
             {
                 await _unitOfWork.Repository<TeamDancer>().DeleteAsync(dancerToRemove);
-                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamsCacheKey);
+                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamMembersCacheKey);
                 return await Result<int>.SuccessAsync(dancerToRemove.Id, _localizer["Member Removed"]);
             }
             else

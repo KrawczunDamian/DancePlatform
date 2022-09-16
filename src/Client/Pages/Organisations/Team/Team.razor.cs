@@ -29,6 +29,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private GetTeamByIdResponse _team = new();
         private char _firstLetterOfName;
         private List<GetDancersWithProfileInfoResponse> _teamMembers = new();
+        private List<string> _teamGallery = new();
 
         private ClaimsPrincipal _currentUser;
         private bool _canEditTeam;
@@ -40,6 +41,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             await GetTeamAsync(teamId);
             _canEditTeam = ((await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded || _team.CreatedBy == _currentUser.GetUserId());
             await GetTeamMembersAsync(teamId);
+            await GetTeamGalleryAsync(teamId);
             var data = await TeamManager.GetProfilePictureAsync(teamId);
             if (data.Succeeded)
             {
@@ -87,6 +89,21 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 }
             }
         }
+        private async Task GetTeamGalleryAsync(int id = 0)
+        {
+            var response = await TeamManager.GetTeamGalleryAsync(id);
+            if (response.Succeeded)
+            {
+                _teamGallery = response.Data;
+            }
+            else
+            {
+                foreach (var message in response.Messages)
+                {
+                    _snackBar.Add(message, Severity.Error);
+                }
+            }
+        }
         private async Task AddMember()
         {
             var parameters = new DialogParameters()
@@ -99,16 +116,32 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             var result = await dialog.Result;
             await Reset();
         }
-        private async Task AddPhotos()
+        private async Task AddPhoto(InputFileChangeEventArgs e)
         {
-            var parameters = new DialogParameters()
+            _file = e.File;
+            if (_file != null)
             {
-                ["teamId"] = _team.Id
-            };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddPhotosToTeamModal>(_localizer["Add Photos"], parameters, options);
-            var result = await dialog.Result;
-            await Reset();
+                var extension = Path.GetExtension(_file.Name);
+                var fileName = $"{teamId}-{Guid.NewGuid()}{extension}";
+                var format = "image/png";
+                var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
+                var buffer = new byte[imageFile.Size];
+                await imageFile.OpenReadStream().ReadAsync(buffer);
+                var request = new UploadPictureTeamCommand { TeamId = teamId, Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.TeamGalleryPictures };
+                var result = await TeamManager.UploadTeamPicutreAsync(request);
+                if (result.Succeeded)
+                {
+                    await Reset();
+                    _snackBar.Add(_localizer["Photo Uploaded"], Severity.Success);
+                }
+                else
+                {
+                    foreach (var error in result.Messages)
+                    {
+                        _snackBar.Add(error, Severity.Error);
+                    }
+                }
+            }
         }
         private async Task RemoveMember(int dancerId)
         {
@@ -145,9 +178,11 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         {
             _teamMembers = new List<GetDancersWithProfileInfoResponse>();
             _team = new GetTeamByIdResponse();
+            _teamGallery = new List<string>();
             await GetTeamAsync(teamId);
             await GetTeamMembersAsync(teamId);
-            
+            await GetTeamGalleryAsync(teamId);
+
         }
         private IBrowserFile _file;
 
