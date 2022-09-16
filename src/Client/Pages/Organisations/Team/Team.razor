@@ -67,6 +67,8 @@ else
                 <MudPaper Square="true">
                     <MudPaper Class="pa-2" Square="true">
                         <MudText Typo="Typo.h4" Color="Color.Primary">@_localizer["Photos"]</MudText>
+                        <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddPhotos())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Photos"]</MudButton>
+                        <MudDivider></MudDivider>
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
                         <MudText Class="d-inline" Typo="Typo.h4" Color="Color.Primary">@_localizer["Members"]</MudText>

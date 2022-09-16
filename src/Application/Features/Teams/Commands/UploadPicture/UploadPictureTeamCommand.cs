@@ -2,6 +2,7 @@
 using DancePlatform.Application.Enums;
 using DancePlatform.Application.Interfaces.Repositories;
 using DancePlatform.Application.Interfaces.Services;
+using DancePlatform.Application.Requests;
 using DancePlatform.Application.Requests.Organisations.Team;
 using DancePlatform.Domain.Entities.Organisations;
 using DancePlatform.Shared.Constants.Application;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture
 {
-    public partial class UpdateProfilePictureTeamCommand : IRequest<Result<int>>
+    public partial class UploadPictureTeamCommand : IRequest<Result<int>>
     {
         [Required]
         public int TeamId { get; set; }
@@ -28,14 +29,14 @@ namespace DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture
         public byte[] Data { get; set; }
     }
 
-    internal class UpdateProfilePictureTeamCommandHandler : IRequestHandler<UpdateProfilePictureTeamCommand, Result<int>>
+    internal class UploadPictureTeamCommandHandler : IRequestHandler<UploadPictureTeamCommand, Result<int>>
     {
         private readonly IMapper _mapper;
-        private readonly IStringLocalizer<UpdateProfilePictureTeamCommandHandler> _localizer;
+        private readonly IStringLocalizer<UploadPictureTeamCommandHandler> _localizer;
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IUploadService _uploadService;
 
-        public UpdateProfilePictureTeamCommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IStringLocalizer<UpdateProfilePictureTeamCommandHandler> localizer, IUploadService uploadService)
+        public UploadPictureTeamCommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IStringLocalizer<UploadPictureTeamCommandHandler> localizer, IUploadService uploadService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -43,12 +44,12 @@ namespace DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture
             _uploadService = uploadService;
         }
 
-        public async Task<Result<int>> Handle(UpdateProfilePictureTeamCommand command, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(UploadPictureTeamCommand command, CancellationToken cancellationToken)
         {
             var team = await _unitOfWork.Repository<Team>().GetByIdAsync(command.TeamId);
             if (team != null)
             {
-                var request = new UpdateProfilePictureTeamRequest()
+                var request = new UploadRequest()
                 {
                     Data = command.Data,
                     Extension = command.Extension,
@@ -59,7 +60,7 @@ namespace DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture
                 team.ProfilePictureURL = filePath;
                 await _unitOfWork.Repository<Team>().UpdateAsync(team);
                 await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamsCacheKey);
-                return await Result<int>.SuccessAsync(team.Id, _localizer["Picture uploaded"]);
+                return await Result<int>.SuccessAsync(team.Id, _localizer["Team Updated"]);
             }
             else
             {

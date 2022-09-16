@@ -3,6 +3,7 @@ using DancePlatform.Application.Interfaces.Repositories;
 using DancePlatform.Application.Interfaces.Services.Account;
 using DancePlatform.Domain.Entities.Organisations;
 using DancePlatform.Domain.Entities.Relations;
+using DancePlatform.Domain.Entities.Relations.Photos;
 using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Models;
 using DancePlatform.Shared.Wrapper;

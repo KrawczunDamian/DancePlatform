@@ -134,5 +134,16 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         {
             return Ok(await _mediator.Send(new RemoveTeamMemberCommand { DancerId = dancerId, TeamId = teamId }));
         }
+        /// <summary>
+        /// Upload picture to team's gallery
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Create)]
+        [HttpPost("updateProfilePicture")]
+        public async Task<IActionResult> UploadTeamPicture(UploadPictureTeamCommand command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
     }
 }

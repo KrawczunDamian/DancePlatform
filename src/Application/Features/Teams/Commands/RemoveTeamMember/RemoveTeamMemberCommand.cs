@@ -1,6 +1,7 @@
 ﻿using DancePlatform.Application.Interfaces.Repositories;
 using DancePlatform.Domain.Entities.Organisations;
 using DancePlatform.Domain.Entities.Relations;
+using DancePlatform.Domain.Entities.Relations.Photos;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Wrapper;
 using MediatR;

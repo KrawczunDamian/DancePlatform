@@ -22,7 +22,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
     public partial class Team
     {
         [Inject] private ITeamManager TeamManager { get; set; }
-        [Inject] private IAccountManager AccountManager { get; set; }
 
         [Parameter] public int teamId { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -32,23 +31,14 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private List<GetDancersWithProfileInfoResponse> _teamMembers = new();
 
         private ClaimsPrincipal _currentUser;
-        private bool _canCreateTeams;
-        private bool _canEditTeams;
-        private bool _canDeleteTeams;
-        private bool _canExportTeams;
-        private bool _canSearchTeams;
+        private bool _canEditTeam;
         private bool _loaded;
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();
-            _canCreateTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Create)).Succeeded;
-            _canEditTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded;
-            _canDeleteTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Delete)).Succeeded;
-            _canExportTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Export)).Succeeded;
-            _canSearchTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Search)).Succeeded;
-
 
             await GetTeamAsync(teamId);
+            _canEditTeam = ((await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded || _team.CreatedBy == _currentUser.GetUserId());
             await GetTeamMembersAsync(teamId);
             var data = await TeamManager.GetProfilePictureAsync(teamId);
             if (data.Succeeded)
@@ -106,6 +96,17 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
+            var result = await dialog.Result;
+            await Reset();
+        }
+        private async Task AddPhotos()
+        {
+            var parameters = new DialogParameters()
+            {
+                ["teamId"] = _team.Id
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddPhotosToTeamModal>(_localizer["Add Photos"], parameters, options);
             var result = await dialog.Result;
             await Reset();
         }
