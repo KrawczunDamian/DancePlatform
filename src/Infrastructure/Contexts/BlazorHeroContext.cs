@@ -1,7 +1,6 @@
 ﻿using DancePlatform.Application.Interfaces.Services;
 using DancePlatform.Application.Models.Chat;
 using DancePlatform.Domain.Contracts;
-using DancePlatform.Domain.Entities.Catalog;
 using DancePlatform.Domain.Entities.Organisations;
 using DancePlatform.Domain.Entities.Relations;
 using DancePlatform.Domain.Entities.Relations.Photos;
@@ -28,10 +27,7 @@ namespace DancePlatform.Infrastructure.Contexts
         }
 
         public DbSet<ChatHistory<BlazorHeroUser>> ChatHistories { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Brand> Brands { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<Federation> Federations { get; set; }
         public DbSet<Dancer> Dancers { get; set; }
         public DbSet<TeamDancer> TeamDancers { get; set; }
         public DbSet<TeamPhoto> TeamPhotos { get; set; }

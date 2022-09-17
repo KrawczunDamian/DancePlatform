@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Brands" xml:space="preserve">
-    <value>Brands</value>
+  <data name="Dancers" xml:space="preserve">
+    <value>Dancers</value>
   </data>
-  <data name="Document Extended Attributes" xml:space="preserve">
-    <value>Document Extended Attributes</value>
-  </data>
-  <data name="Document Types" xml:space="preserve">
-    <value>Document Types</value>
-  </data>
-  <data name="Documents" xml:space="preserve">
-    <value>Documents</value>
-  </data>
-  <data name="Products" xml:space="preserve">
-    <value>Products</value>
+  <data name="Teams" xml:space="preserve">
+    <value>Teams</value>
   </data>
 </root>

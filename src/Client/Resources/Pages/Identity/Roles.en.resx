@@ -127,10 +127,10 @@
     <value>Create</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Deleted</value>
   </data>
   <data name="Delete Content" xml:space="preserve">
-    <value>Do you want to delete the role with Id {0}?</value>
+    <value>Delete {0} this?</value>
   </data>
   <data name="Dense" xml:space="preserve">
     <value>Dense</value>

@@ -129,6 +129,9 @@
   <data name="Charts comming soon ish..." xml:space="preserve">
     <value>Charts comming soon ish...</value>
   </data>
+  <data name="Dancers" xml:space="preserve">
+    <value>Dancers</value>
+  </data>
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
@@ -185,5 +188,8 @@
   </data>
   <data name="Sep" xml:space="preserve">
     <value>Sep</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Teams</value>
   </data>
 </root>

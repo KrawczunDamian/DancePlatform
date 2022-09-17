@@ -14,8 +14,6 @@
         public static class Server
         {
             public static string Preference = "serverPreference";
-
-            //TODO - add
         }
     }
 }

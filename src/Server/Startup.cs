@@ -40,7 +40,7 @@ namespace DancePlatform.Server
             services.AddCurrentUserService();
             services.AddSerialization();
             services.AddDatabase(_configuration);
-            services.AddServerStorage(); //TODO - should implement ServerStorageProvider to work correctly!
+            services.AddServerStorage();
             services.AddScoped<ServerPreferenceManager>();
             services.AddServerLocalization();
             services.AddIdentity();
@@ -48,7 +48,6 @@ namespace DancePlatform.Server
             services.AddApplicationLayer();
             services.AddApplicationServices();
             services.AddRepositories();
-            services.AddExtendedAttributesUnitOfWork();
             services.AddSharedInfrastructure(_configuration);
             services.RegisterSwagger();
             services.AddInfrastructureMappings();
@@ -84,7 +83,7 @@ namespace DancePlatform.Server
             app.UseAuthorization();
             app.UseHangfireDashboard("/jobs", new DashboardOptions
             {
-                DashboardTitle = localizer["BlazorHero Jobs"],
+                DashboardTitle = localizer["DanceFairAndSquare Jobs"],
                 Authorization = new[] { new HangfireAuthorizationFilter() }
             });
             app.UseEndpoints();

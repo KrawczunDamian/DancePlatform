@@ -5,6 +5,12 @@
     <RootNamespace>DancePlatform.Application</RootNamespace>
     <AssemblyName>DancePlatform.Application</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\Validators\Features\ExtendedAttributes\**" />
+    <EmbeddedResource Remove="Resources\Validators\Features\ExtendedAttributes\**" />
+    <None Remove="Resources\Validators\Features\ExtendedAttributes\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -21,9 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Validators\Features\ExtendedAttributes\Commands\AddEdit\" />
   </ItemGroup>
 
 </Project>

@@ -12,8 +12,5 @@ namespace DancePlatform.Application.Enums
 
         [Description(@"Images\TeamGalleryPictures")]
         TeamGalleryPictures,
-
-        [Description(@"Images\FederationProfilePictures")]
-        FederationProfilePicture,
     }
 }
