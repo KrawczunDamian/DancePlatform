@@ -1,6 +1,7 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Application.Features.Teams.Commands.AddMember;
 using DancePlatform.Application.Features.Teams.Commands.Delete;
+using DancePlatform.Application.Features.Teams.Commands.RemoveTeamPicture;
 using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.Export;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
@@ -139,7 +140,7 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Create)]
+        [Authorize(Policy = Permissions.Teams.Edit)]
         [HttpPost("uploadTeamPicture")]
         public async Task<IActionResult> UploadTeamPicture(UploadPictureTeamCommand command)
         {
@@ -154,6 +155,17 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         public async Task<IActionResult> GetTeamGalleryAsync(int teamId)
         {
             return Ok(await _mediator.Send(new GetTeamGalleryQuery() { TeamId = teamId }));
+        }
+        /// <summary>
+        /// Remove a picture from gallery
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Edit)]
+        [HttpPost("removeTeamPicture")]
+        public async Task<IActionResult> RemoveMemberAsync(RemoveTeamPictureCommand command)
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }

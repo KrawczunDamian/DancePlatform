@@ -76,16 +76,18 @@ else
                         {
                             <MudCarousel ItemsSource="@_teamGallery" Style="height:500px" AutoCycle="false">
                                 <ItemTemplate>
-                                <div class="d-flex flex-column flex-column justify-center" style="height:90%">
-                                    <img src="@context" style="max-height:450px;object-fit:scale-down">
-                                </div>
-                            </ItemTemplate>
-                        </MudCarousel>
+                                    <div class="d-flex flex-column flex-column justify-center" style="height:90%">
+                                        <img src="@context" style="max-height:450px;object-fit:scale-down">
+                                        <MudIconButton Size="Size.Small" OnClick="@((e) => RemovePicture(context))" Icon="@Icons.Material.Filled.Block" Color="Color.Error"></MudIconButton>
+                                    </div>
+                                </ItemTemplate>
+                            </MudCarousel>
                         }
-                        else{
+                        else
+                        {
                             <MudItem>
-                                    <MiniTitle Title="@_localizer["No photos"]" />
-                                </MudItem>
+                                <MiniTitle Title="@_localizer["No photos"]" />
+                            </MudItem>
                         }
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">

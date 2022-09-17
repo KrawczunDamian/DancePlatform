@@ -1,8 +1,8 @@
 ﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Commands.RemoveTeamPicture;
 using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
-using DancePlatform.Client.Infrastructure.Managers.Identity.Account;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
@@ -131,7 +131,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 var result = await TeamManager.UploadTeamPicutreAsync(request);
                 if (result.Succeeded)
                 {
-                    await Reset();
+                    _navigationManager.NavigateTo($"/organisations/team/{teamId}", true);
                     _snackBar.Add(_localizer["Photo Uploaded"], Severity.Success);
                 }
                 else
@@ -141,6 +141,39 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                         _snackBar.Add(error, Severity.Error);
                     }
                 }
+            }
+        }
+        private async Task RemovePicture(string pictureUrl)
+        {
+            string deleteContent = _localizer["Remove photo"];
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, pictureUrl)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Remove"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var command = new RemoveTeamPictureCommand()
+                {
+                    TeamId = _team.Id,
+                    PictureUrl = pictureUrl,
+                };
+                var response = await TeamManager.RemoveTeamPictureAsync(command);
+                if (response.Succeeded)
+                {
+                    _navigationManager.NavigateTo($"/organisations/team/{teamId}", true);
+                    _snackBar.Add(_localizer["Photo removed"], Severity.Success);
+                }
+                else
+                {
+                    foreach (var error in response.Messages)
+                    {
+                        _snackBar.Add(error, Severity.Error);
+                    }
+                }
+
             }
         }
         private async Task RemoveMember(int dancerId)

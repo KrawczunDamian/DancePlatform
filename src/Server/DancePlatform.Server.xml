@@ -386,6 +386,13 @@
             <param name="teamId"></param>
             <returns>Status 200 OK </returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.Organisations.TeamsController.RemoveMemberAsync(DancePlatform.Application.Features.Teams.Commands.RemoveTeamPicture.RemoveTeamPictureCommand)">
+            <summary>
+            Remove a picture from gallery
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:DancePlatform.Server.Controllers.v1.UserProfile.DancersController.GetAll">
             <summary>
             Get All Dancers

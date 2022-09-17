@@ -16,6 +16,7 @@
         public static string AddMember = "api/v1/teams/addMember";
         public static string UploadTeamPicture = "api/v1/teams/uploadTeamPicture";
         public static string GetTeamGallery = "api/v1/teams/getTeamGallery";
+        public static string RemoveTeamPicture = "api/v1/teams/removeTeamPicture";
 
 
         public static string GetAll = "api/v1/teams";
