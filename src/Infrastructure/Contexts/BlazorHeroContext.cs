@@ -1,17 +1,17 @@
 ﻿using DancePlatform.Application.Interfaces.Services;
 using DancePlatform.Application.Models.Chat;
-using DancePlatform.Infrastructure.Models.Identity;
 using DancePlatform.Domain.Contracts;
 using DancePlatform.Domain.Entities.Catalog;
+using DancePlatform.Domain.Entities.Organisations;
+using DancePlatform.Domain.Entities.Relations;
+using DancePlatform.Domain.Entities.Relations.Photos;
+using DancePlatform.Domain.Entities.UserProfile;
+using DancePlatform.Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DancePlatform.Domain.Entities.Organisations;
-using DancePlatform.Domain.Entities.UserProfile;
-using DancePlatform.Domain.Entities.General;
-using DancePlatform.Domain.Entities.Relations;
 
 namespace DancePlatform.Infrastructure.Contexts
 {
@@ -33,8 +33,8 @@ namespace DancePlatform.Infrastructure.Contexts
         public DbSet<Team> Teams { get; set; }
         public DbSet<Federation> Federations { get; set; }
         public DbSet<Dancer> Dancers { get; set; }
-        public DbSet<DanceStyle> DanceStyles { get; set; }
         public DbSet<TeamDancer> TeamDancers { get; set; }
+        public DbSet<TeamPhoto> TeamPhotos { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

@@ -1,5 +1,6 @@
 ﻿using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Application.Features.Teams.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Queries.GetGallery;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Shared.Constants.Application;

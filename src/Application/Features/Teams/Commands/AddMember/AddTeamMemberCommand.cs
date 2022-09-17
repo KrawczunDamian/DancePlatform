@@ -1,6 +1,7 @@
 ﻿using DancePlatform.Application.Interfaces.Repositories;
 using DancePlatform.Domain.Entities.Organisations;
 using DancePlatform.Domain.Entities.Relations;
+using DancePlatform.Domain.Entities.Relations.Photos;
 using DancePlatform.Domain.Entities.UserProfile;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Wrapper;
@@ -45,7 +46,7 @@ namespace DancePlatform.Application.Features.Teams.Commands.AddMember
                     Dancer = dancer
                 };
                 await _unitOfWork.Repository<TeamDancer>().AddAsync(teamMember);
-                await _unitOfWork.Commit(cancellationToken);
+                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamMembersCacheKey);
                 return await Result<int>.SuccessAsync(team.Id, _localizer["Team Member Added"]);
             }
             else

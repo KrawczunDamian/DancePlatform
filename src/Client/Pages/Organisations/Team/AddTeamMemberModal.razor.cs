@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DancePlatform.Client.Pages.Organisations.Team
@@ -81,6 +82,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 var response = await TeamManager.RemoveMemberAsync(teamId, dancerId);
                 if (response.Succeeded)
                 {
+                    teamsDancers.Remove(teamsDancers.FirstOrDefault(x => x.Id == dancerId));
                     await Reset();
                     await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                     _snackBar.Add(response.Messages[0], Severity.Success);
@@ -106,6 +108,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             var response = await TeamManager.AddTeamMemberAsync(command);
             if (response.Succeeded)
             {
+                teamsDancers.Add(_allDancers.FirstOrDefault(x => x.Id == dancerId));
                 await Reset();
                 await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                 _snackBar.Add(response.Messages[0], Severity.Success);
@@ -121,13 +124,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         }
         private async Task Reset()
         {
-            InvokeAsync(async () =>
-            {
-                _allDancers.Clear();
-                await GetAllDancersAsync();
-                StateHasChanged();
-            });
-            
+            await GetAllDancersAsync();
         }
     }
 }

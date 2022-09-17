@@ -1,6 +1,7 @@
 ﻿using DancePlatform.Application.Interfaces.Repositories;
 using DancePlatform.Domain.Entities.Organisations;
 using DancePlatform.Domain.Entities.Relations;
+using DancePlatform.Domain.Entities.Relations.Photos;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Wrapper;
 using MediatR;
@@ -35,7 +36,7 @@ namespace DancePlatform.Application.Features.Teams.Commands.Delete
             if (dancerToRemove != null)
             {
                 await _unitOfWork.Repository<TeamDancer>().DeleteAsync(dancerToRemove);
-                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamsCacheKey);
+                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllTeamMembersCacheKey);
                 return await Result<int>.SuccessAsync(dancerToRemove.Id, _localizer["Member Removed"]);
             }
             else

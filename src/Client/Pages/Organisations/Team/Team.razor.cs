@@ -1,8 +1,8 @@
 ﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Commands.RemoveTeamPicture;
 using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
 using DancePlatform.Client.Extensions;
-using DancePlatform.Client.Infrastructure.Managers.Identity.Account;
 using DancePlatform.Client.Infrastructure.Managers.Organisations.Team;
 using DancePlatform.Shared.Constants.Application;
 using DancePlatform.Shared.Constants.Permission;
@@ -22,7 +22,6 @@ namespace DancePlatform.Client.Pages.Organisations.Team
     public partial class Team
     {
         [Inject] private ITeamManager TeamManager { get; set; }
-        [Inject] private IAccountManager AccountManager { get; set; }
 
         [Parameter] public int teamId { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -30,26 +29,19 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private GetTeamByIdResponse _team = new();
         private char _firstLetterOfName;
         private List<GetDancersWithProfileInfoResponse> _teamMembers = new();
+        private List<string> _teamGallery = new();
 
         private ClaimsPrincipal _currentUser;
-        private bool _canCreateTeams;
-        private bool _canEditTeams;
-        private bool _canDeleteTeams;
-        private bool _canExportTeams;
-        private bool _canSearchTeams;
+        private bool _canEditTeam;
         private bool _loaded;
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();
-            _canCreateTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Create)).Succeeded;
-            _canEditTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded;
-            _canDeleteTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Delete)).Succeeded;
-            _canExportTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Export)).Succeeded;
-            _canSearchTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Search)).Succeeded;
-
 
             await GetTeamAsync(teamId);
+            _canEditTeam = ((await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded || _team.CreatedBy == _currentUser.GetUserId());
             await GetTeamMembersAsync(teamId);
+            await GetTeamGalleryAsync(teamId);
             var data = await TeamManager.GetProfilePictureAsync(teamId);
             if (data.Succeeded)
             {
@@ -97,6 +89,21 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                 }
             }
         }
+        private async Task GetTeamGalleryAsync(int id = 0)
+        {
+            var response = await TeamManager.GetTeamGalleryAsync(id);
+            if (response.Succeeded)
+            {
+                _teamGallery = response.Data;
+            }
+            else
+            {
+                foreach (var message in response.Messages)
+                {
+                    _snackBar.Add(message, Severity.Error);
+                }
+            }
+        }
         private async Task AddMember()
         {
             var parameters = new DialogParameters()
@@ -108,6 +115,66 @@ namespace DancePlatform.Client.Pages.Organisations.Team
             var dialog = _dialogService.Show<AddTeamMemberModal>(_localizer["Add Member"], parameters, options);
             var result = await dialog.Result;
             await Reset();
+        }
+        private async Task AddPhoto(InputFileChangeEventArgs e)
+        {
+            _file = e.File;
+            if (_file != null)
+            {
+                var extension = Path.GetExtension(_file.Name);
+                var fileName = $"{teamId}-{Guid.NewGuid()}{extension}";
+                var format = "image/png";
+                var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
+                var buffer = new byte[imageFile.Size];
+                await imageFile.OpenReadStream().ReadAsync(buffer);
+                var request = new UploadPictureTeamCommand { TeamId = teamId, Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.TeamGalleryPictures };
+                var result = await TeamManager.UploadTeamPicutreAsync(request);
+                if (result.Succeeded)
+                {
+                    _navigationManager.NavigateTo($"/organisations/team/{teamId}", true);
+                    _snackBar.Add(_localizer["Photo Uploaded"], Severity.Success);
+                }
+                else
+                {
+                    foreach (var error in result.Messages)
+                    {
+                        _snackBar.Add(error, Severity.Error);
+                    }
+                }
+            }
+        }
+        private async Task RemovePicture(string pictureUrl)
+        {
+            string deleteContent = _localizer["Remove photo"];
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, pictureUrl)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Remove"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var command = new RemoveTeamPictureCommand()
+                {
+                    TeamId = _team.Id,
+                    PictureUrl = pictureUrl,
+                };
+                var response = await TeamManager.RemoveTeamPictureAsync(command);
+                if (response.Succeeded)
+                {
+                    _navigationManager.NavigateTo($"/organisations/team/{teamId}", true);
+                    _snackBar.Add(_localizer["Photo removed"], Severity.Success);
+                }
+                else
+                {
+                    foreach (var error in response.Messages)
+                    {
+                        _snackBar.Add(error, Severity.Error);
+                    }
+                }
+
+            }
         }
         private async Task RemoveMember(int dancerId)
         {
@@ -144,9 +211,11 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         {
             _teamMembers = new List<GetDancersWithProfileInfoResponse>();
             _team = new GetTeamByIdResponse();
+            _teamGallery = new List<string>();
             await GetTeamAsync(teamId);
             await GetTeamMembersAsync(teamId);
-            
+            await GetTeamGalleryAsync(teamId);
+
         }
         private IBrowserFile _file;
 
