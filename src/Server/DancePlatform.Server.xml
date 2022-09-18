@@ -327,5 +327,12 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.UserProfile.DancersController.GetById(System.String)">
+            <summary>
+            Get a Dancer By Account Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
     </members>
 </doc>

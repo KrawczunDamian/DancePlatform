@@ -69,19 +69,23 @@ else
             <MudTd DataLabel="City">
                 <MudHighlighter Text="@context.City" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Actions" Style="text-align: right">
-                @if (_canEditTeams || _canDeleteTeams)
+            <MudTd DataLabel="Actions">
+                @if (_canEditTeams || _canDeleteTeams || @_currentUserId == context.CreatedBy)
                 {
                     <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                        @if (_canEditTeams)
+                        @if (_canEditTeams || @_currentUserId == context.CreatedBy)
                         {
                             <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
                         }
-                        @if (_canDeleteTeams)
+                        @if (_canDeleteTeams || @_currentUserId == context.CreatedBy)
                         {
                             <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
                         }
                     </MudMenu>
+                }
+                else
+                {
+                    <MudText>@_localizer["No Allowed Actions"]</MudText>
                 }
             </MudTd>
         </RowTemplate>

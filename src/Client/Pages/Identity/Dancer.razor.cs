@@ -1,75 +1,50 @@
-﻿using DancePlatform.Application.Requests.Identity;
+﻿using Blazored.FluentValidation;
+using DancePlatform.Application.Requests.Identity;
+using DancePlatform.Client.Extensions;
+using DancePlatform.Client.Infrastructure.Managers.UserProfile;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Threading.Tasks;
-using Blazored.FluentValidation;
 
 namespace DancePlatform.Client.Pages.Identity
 {
     public partial class Dancer
     {
+        [Inject] private IDancerManager DancerManager { get; set; }
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private readonly ChangePasswordRequest _passwordModel = new();
+        private readonly UpdateDancerRequest _dancerModel = new();
 
-        private async Task ChangePasswordAsync()
+        public string UserId { get; set; }
+
+
+        protected override async Task OnInitializedAsync()
         {
-            var response = await _accountManager.ChangePasswordAsync(_passwordModel);
+            await LoadDataAsync();
+        }
+        private async Task UpdateDancerAsync()
+        {
+            var response = await _accountManager.UpdateDancerAsync(_dancerModel, UserId);
             if (response.Succeeded)
             {
-                _snackBar.Add(_localizer["Password Changed!"], Severity.Success);
-                _passwordModel.Password = string.Empty;
-                _passwordModel.NewPassword = string.Empty;
-                _passwordModel.ConfirmNewPassword = string.Empty;
+                await _authenticationManager.Logout();
+                _snackBar.Add(_localizer["Your Profile has been updated. Please Login to Continue."], Severity.Success);
+                _navigationManager.NavigateTo("/");
             }
             else
             {
-                foreach (var error in response.Messages)
+                foreach (var message in response.Messages)
                 {
-                    _snackBar.Add(error, Severity.Error);
+                    _snackBar.Add(message, Severity.Error);
                 }
             }
         }
-
-        private bool _currentPasswordVisibility;
-        private InputType _currentPasswordInput = InputType.Password;
-        private string _currentPasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-
-        private bool _newPasswordVisibility;
-        private InputType _newPasswordInput = InputType.Password;
-        private string _newPasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-
-        private void TogglePasswordVisibility(bool newPassword)
+        private async Task LoadDataAsync()
         {
-            if (newPassword)
-            {
-                if (_newPasswordVisibility)
-                {
-                    _newPasswordVisibility = false;
-                    _newPasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-                    _newPasswordInput = InputType.Password;
-                }
-                else
-                {
-                    _newPasswordVisibility = true;
-                    _newPasswordInputIcon = Icons.Material.Filled.Visibility;
-                    _newPasswordInput = InputType.Text;
-                }
-            }
-            else
-            {
-                if (_currentPasswordVisibility)
-                {
-                    _currentPasswordVisibility = false;
-                    _currentPasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-                    _currentPasswordInput = InputType.Password;
-                }
-                else
-                {
-                    _currentPasswordVisibility = true;
-                    _currentPasswordInputIcon = Icons.Material.Filled.Visibility;
-                    _currentPasswordInput = InputType.Text;
-                }
-            }
+            var state = await _stateProvider.GetAuthenticationStateAsync();
+            var user = state.User;
+            UserId = user.GetUserId();
+            //_profileModel.Email = user.GetEmail();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
+using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Application.Features.Teams.Commands.RemoveTeamPicture;
 using DancePlatform.Application.Features.Teams.Commands.UpdateProfilePicture;
 using DancePlatform.Application.Features.Teams.Queries.GetById;
@@ -32,12 +33,13 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private List<string> _teamGallery = new();
 
         private ClaimsPrincipal _currentUser;
+        private string _currentUserId;
         private bool _canEditTeam;
         private bool _loaded;
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();
-
+            _currentUserId = _currentUser.GetUserId();
             await GetTeamAsync(teamId);
             _canEditTeam = ((await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded || _team.CreatedBy == _currentUser.GetUserId());
             await GetTeamMembersAsync(teamId);
@@ -247,6 +249,29 @@ namespace DancePlatform.Client.Pages.Organisations.Team
                         _snackBar.Add(error, Severity.Error);
                     }
                 }
+            }
+        }
+        private async Task EditTeam()
+        {
+            var parameters = new DialogParameters();
+            if (_team != null)
+            {
+                parameters.Add(nameof(AddEditTeamModal.AddEditTeamModel), new AddEditTeamCommand
+                {
+                    Id = _team.Id,
+                    Name = _team.Name,
+                    Description = _team.Description,
+                    Country = _team.Country,
+                    City = _team.City,
+                    PhoneNumber = _team.PhoneNumber
+                });
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditTeamModal>(_localizer["Edit"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await Reset();
             }
         }
     }

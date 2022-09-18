@@ -13,7 +13,13 @@ else
     <MudContainer Fixed="true">
         <MudGrid Spacing="0">
             <MudItem xs="3" Style="max-width:200px">
-                <MudPaper Class="pa-2 justify-center" Square="true"><BigTitle Title="@_localizer["Team"]" /></MudPaper>
+                <MudPaper Class="pa-2 justify-center" Square="true">
+                    <BigTitle Title="@_localizer["Team"]" />
+                    @if (_canEditTeam || _currentUserId == _team.CreatedBy)
+                    {
+                        <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => EditTeam())" StartIcon="@Icons.Material.Filled.Edit" IconColor="Color.Surface">@_localizer["Edit"]</MudButton>
+                    }
+                </MudPaper>
                 <MudPaper Class="pa-2" Square="true">
                     <MudContainer Class="pa-2">
                         <div class="d-flex justify-center" style="width:100%">

@@ -32,6 +32,7 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         private bool _bordered = false;
 
         private ClaimsPrincipal _currentUser;
+        private string _currentUserId;
         private bool _canCreateTeams;
         private bool _canEditTeams;
         private bool _canDeleteTeams;
@@ -42,12 +43,12 @@ namespace DancePlatform.Client.Pages.Organisations.Team
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _authenticationManager.CurrentUser();
+            _currentUserId = _currentUser.GetUserId();
             _canCreateTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Create)).Succeeded;
             _canEditTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Edit)).Succeeded;
             _canDeleteTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Delete)).Succeeded;
             _canExportTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Export)).Succeeded;
             _canSearchTeams = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Teams.Search)).Succeeded;
-
             await GetTeamsAsync();
             _loaded = true;
             HubConnection = HubConnection.TryInitialize(_navigationManager);
