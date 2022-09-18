@@ -61,13 +61,13 @@ namespace DancePlatform.Client.Pages.Authentication
 
         private void FillAdministratorCredentials()
         {
-            _tokenModel.Email = "mukesh@blazorhero.com";
+            _tokenModel.Email = "krawczun.d@gmail.com";
             _tokenModel.Password = "123Pa$$word!";
         }
 
         private void FillBasicUserCredentials()
         {
-            _tokenModel.Email = "john@blazorhero.com";
+            _tokenModel.Email = "krawczunowy1@gmail.com";
             _tokenModel.Password = "123Pa$$word!";
         }
     }

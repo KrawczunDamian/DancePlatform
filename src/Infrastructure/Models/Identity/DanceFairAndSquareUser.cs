@@ -8,7 +8,7 @@ using DancePlatform.Application.Models.Chat;
 
 namespace DancePlatform.Infrastructure.Models.Identity
 {
-    public class BlazorHeroUser : IdentityUser<string>, IChatUser, IAuditableEntity<string>
+    public class DanceFairAndSquareUser : IdentityUser<string>, IChatUser, IAuditableEntity<string>
     {
         public string FirstName { get; set; }
 
@@ -30,13 +30,13 @@ namespace DancePlatform.Infrastructure.Models.Identity
         public bool IsActive { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
-        public virtual ICollection<ChatHistory<BlazorHeroUser>> ChatHistoryFromUsers { get; set; }
-        public virtual ICollection<ChatHistory<BlazorHeroUser>> ChatHistoryToUsers { get; set; }
+        public virtual ICollection<ChatHistory<DanceFairAndSquareUser>> ChatHistoryFromUsers { get; set; }
+        public virtual ICollection<ChatHistory<DanceFairAndSquareUser>> ChatHistoryToUsers { get; set; }
 
-        public BlazorHeroUser()
+        public DanceFairAndSquareUser()
         {
-            ChatHistoryFromUsers = new HashSet<ChatHistory<BlazorHeroUser>>();
-            ChatHistoryToUsers = new HashSet<ChatHistory<BlazorHeroUser>>();
+            ChatHistoryFromUsers = new HashSet<ChatHistory<DanceFairAndSquareUser>>();
+            ChatHistoryToUsers = new HashSet<ChatHistory<DanceFairAndSquareUser>>();
         }
     }
 }

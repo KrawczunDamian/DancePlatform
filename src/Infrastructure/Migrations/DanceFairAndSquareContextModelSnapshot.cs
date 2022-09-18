@@ -4,24 +4,22 @@ using DancePlatform.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DancePlatform.Infrastructure.Migrations
 {
-    [DbContext(typeof(BlazorHeroContext))]
-    [Migration("20210528104232_AddBlazorHeroRoleClaim")]
-    partial class AddBlazorHeroRoleClaim
+    [DbContext(typeof(DanceFairAndSquareContext))]
+    partial class DanceFairAndSquareContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DancePlatform.Application.Models.Chat.ChatHistory<DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser>", b =>
+            modelBuilder.Entity("DancePlatform.Application.Models.Chat.ChatHistory<DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser>", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,100 +47,35 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("ChatHistory");
                 });
 
-            modelBuilder.Entity("DancePlatform.Domain.Entities.Catalog.Brand", b =>
+            modelBuilder.Entity("DancePlatform.Domain.Entities.Organisations.Team", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Tax")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("DancePlatform.Domain.Entities.Catalog.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageDataURL")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("DancePlatform.Domain.Entities.Document", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsPublic")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastModifiedBy")
@@ -151,15 +84,138 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("URL")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePictureURL")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("DancePlatform.Domain.Entities.Relations.Photos.TeamPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PictureURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamPhotos");
+                });
+
+            modelBuilder.Entity("DancePlatform.Domain.Entities.Relations.TeamDancer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DancerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DancerId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamDancers");
+                });
+
+            modelBuilder.Entity("DancePlatform.Domain.Entities.UserProfile.Dancer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nickname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dancers");
                 });
 
             modelBuilder.Entity("DancePlatform.Infrastructure.Models.Audit.Audit", b =>
@@ -198,7 +254,7 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("AuditTrails");
                 });
 
-            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.BlazorHeroRole", b =>
+            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -240,7 +296,7 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("Roles", "Identity");
                 });
 
-            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.BlazorHeroRoleClaim", b =>
+            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRoleClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -282,9 +338,10 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("RoleClaims", "Identity");
                 });
 
-            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -463,13 +520,13 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("UserTokens", "Identity");
                 });
 
-            modelBuilder.Entity("DancePlatform.Application.Models.Chat.ChatHistory<DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser>", b =>
+            modelBuilder.Entity("DancePlatform.Application.Models.Chat.ChatHistory<DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser>", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", "FromUser")
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", "FromUser")
                         .WithMany("ChatHistoryFromUsers")
                         .HasForeignKey("FromUserId");
 
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", "ToUser")
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", "ToUser")
                         .WithMany("ChatHistoryToUsers")
                         .HasForeignKey("ToUserId");
 
@@ -478,29 +535,50 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.Navigation("ToUser");
                 });
 
-            modelBuilder.Entity("DancePlatform.Domain.Entities.Catalog.Product", b =>
+            modelBuilder.Entity("DancePlatform.Domain.Entities.Relations.Photos.TeamPhoto", b =>
                 {
-                    b.HasOne("DancePlatform.Domain.Entities.Catalog.Brand", "Brand")
+                    b.HasOne("DancePlatform.Domain.Entities.Organisations.Team", "Team")
                         .WithMany()
-                        .HasForeignKey("BrandId")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Brand");
+                    b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.BlazorHeroRoleClaim", b =>
+            modelBuilder.Entity("DancePlatform.Domain.Entities.Relations.TeamDancer", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroRole", null)
+                    b.HasOne("DancePlatform.Domain.Entities.UserProfile.Dancer", "Dancer")
                         .WithMany()
+                        .HasForeignKey("DancerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DancePlatform.Domain.Entities.Organisations.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dancer");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRoleClaim", b =>
+                {
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", "Role")
+                        .WithMany("RoleClaims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -509,7 +587,7 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -518,13 +596,13 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroRole", null)
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -533,14 +611,19 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", b =>
+                {
+                    b.Navigation("RoleClaims");
+                });
+
+            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", b =>
                 {
                     b.Navigation("ChatHistoryFromUsers");
 

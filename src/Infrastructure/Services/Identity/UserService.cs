@@ -27,8 +27,8 @@ namespace DancePlatform.Infrastructure.Services.Identity
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<BlazorHeroUser> _userManager;
-        private readonly RoleManager<BlazorHeroRole> _roleManager;
+        private readonly UserManager<DanceFairAndSquareUser> _userManager;
+        private readonly RoleManager<DanceFairAndSquareRole> _roleManager;
         private readonly IMailService _mailService;
         private readonly IStringLocalizer<UserService> _localizer;
         private readonly IExcelService _excelService;
@@ -36,9 +36,9 @@ namespace DancePlatform.Infrastructure.Services.Identity
         private readonly IMapper _mapper;
 
         public UserService(
-            UserManager<BlazorHeroUser> userManager,
+            UserManager<DanceFairAndSquareUser> userManager,
             IMapper mapper,
-            RoleManager<BlazorHeroRole> roleManager,
+            RoleManager<DanceFairAndSquareRole> roleManager,
             IMailService mailService,
             IStringLocalizer<UserService> localizer,
             IExcelService excelService,
@@ -67,7 +67,7 @@ namespace DancePlatform.Infrastructure.Services.Identity
             {
                 return await Result.FailAsync(string.Format(_localizer["Username {0} is already taken."], request.UserName));
             }
-            var user = new BlazorHeroUser
+            var user = new DanceFairAndSquareUser
             {
                 Email = request.Email,
                 FirstName = request.FirstName,
@@ -120,7 +120,7 @@ namespace DancePlatform.Infrastructure.Services.Identity
             }
         }
 
-        private async Task<string> SendVerificationEmail(BlazorHeroUser user, string origin)
+        private async Task<string> SendVerificationEmail(DanceFairAndSquareUser user, string origin)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -184,7 +184,7 @@ namespace DancePlatform.Infrastructure.Services.Identity
         public async Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
-            if (user.Email == "mukesh@blazorhero.com")
+            if (user.Email == "mukesh@DanceFairAndSquare.com")
             {
                 return await Result.FailAsync(_localizer["Not Allowed."]);
             }
@@ -283,7 +283,7 @@ namespace DancePlatform.Infrastructure.Services.Identity
                 .OrderByDescending(a => a.CreatedOn)
                 .ToListAsync();
             var result = await _excelService.ExportAsync(users, sheetName: _localizer["Users"],
-                mappers: new Dictionary<string, Func<BlazorHeroUser, object>>
+                mappers: new Dictionary<string, Func<DanceFairAndSquareUser, object>>
                 {
                     { _localizer["Id"], item => item.Id },
                     { _localizer["FirstName"], item => item.FirstName },

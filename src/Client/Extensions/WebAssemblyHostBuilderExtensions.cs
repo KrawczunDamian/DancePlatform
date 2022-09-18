@@ -20,7 +20,7 @@ namespace DancePlatform.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
-        private const string ClientName = "BlazorHero.API";
+        private const string ClientName = "DanceFairAndSquare.API";
 
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
@@ -52,8 +52,8 @@ namespace DancePlatform.Client.Extensions
                 })
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ClientPreferenceManager>()
-                .AddScoped<BlazorHeroStateProvider>()
-                .AddScoped<AuthenticationStateProvider, BlazorHeroStateProvider>()
+                .AddScoped<DanceFairAndSquareStateProvider>()
+                .AddScoped<AuthenticationStateProvider, DanceFairAndSquareStateProvider>()
                 .AddManagers()
                 .AddTransient<AuthenticationHeaderHandler>()
                 .AddScoped(sp => sp

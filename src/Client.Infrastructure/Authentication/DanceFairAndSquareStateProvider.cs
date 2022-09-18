@@ -13,12 +13,12 @@ using DancePlatform.Shared.Constants.Storage;
 
 namespace DancePlatform.Client.Infrastructure.Authentication
 {
-    public class BlazorHeroStateProvider : AuthenticationStateProvider
+    public class DanceFairAndSquareStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
 
-        public BlazorHeroStateProvider(
+        public DanceFairAndSquareStateProvider(
             HttpClient httpClient,
             ILocalStorageService localStorage)
         {

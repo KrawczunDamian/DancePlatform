@@ -14,19 +14,19 @@ using System.Threading.Tasks;
 
 namespace DancePlatform.Infrastructure.Contexts
 {
-    public class BlazorHeroContext : AuditableContext
+    public class DanceFairAndSquareContext : AuditableContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTimeService _dateTimeService;
 
-        public BlazorHeroContext(DbContextOptions<BlazorHeroContext> options, ICurrentUserService currentUserService, IDateTimeService dateTimeService)
+        public DanceFairAndSquareContext(DbContextOptions<DanceFairAndSquareContext> options, ICurrentUserService currentUserService, IDateTimeService dateTimeService)
             : base(options)
         {
             _currentUserService = currentUserService;
             _dateTimeService = dateTimeService;
         }
 
-        public DbSet<ChatHistory<BlazorHeroUser>> ChatHistories { get; set; }
+        public DbSet<ChatHistory<DanceFairAndSquareUser>> ChatHistories { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Dancer> Dancers { get; set; }
         public DbSet<TeamDancer> TeamDancers { get; set; }
@@ -68,7 +68,7 @@ namespace DancePlatform.Infrastructure.Contexts
                 property.SetColumnType("decimal(18,2)");
             }
             base.OnModelCreating(builder);
-            builder.Entity<ChatHistory<BlazorHeroUser>>(entity =>
+            builder.Entity<ChatHistory<DanceFairAndSquareUser>>(entity =>
             {
                 entity.ToTable("ChatHistory");
 
@@ -82,13 +82,13 @@ namespace DancePlatform.Infrastructure.Contexts
                     .HasForeignKey(d => d.ToUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
-            builder.Entity<BlazorHeroUser>(entity =>
+            builder.Entity<DanceFairAndSquareUser>(entity =>
             {
                 entity.ToTable(name: "Users", "Identity");
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
-            builder.Entity<BlazorHeroRole>(entity =>
+            builder.Entity<DanceFairAndSquareRole>(entity =>
             {
                 entity.ToTable(name: "Roles", "Identity");
             });
@@ -107,7 +107,7 @@ namespace DancePlatform.Infrastructure.Contexts
                 entity.ToTable("UserLogins", "Identity");
             });
 
-            builder.Entity<BlazorHeroRoleClaim>(entity =>
+            builder.Entity<DanceFairAndSquareRoleClaim>(entity =>
             {
                 entity.ToTable(name: "RoleClaims", "Identity");
 

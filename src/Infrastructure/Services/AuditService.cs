@@ -18,14 +18,14 @@ namespace DancePlatform.Infrastructure.Services
 {
     public class AuditService : IAuditService
     {
-        private readonly BlazorHeroContext _context;
+        private readonly DanceFairAndSquareContext _context;
         private readonly IMapper _mapper;
         private readonly IExcelService _excelService;
         private readonly IStringLocalizer<AuditService> _localizer;
 
         public AuditService(
             IMapper mapper,
-            BlazorHeroContext context,
+            DanceFairAndSquareContext context,
             IExcelService excelService,
             IStringLocalizer<AuditService> localizer)
         {

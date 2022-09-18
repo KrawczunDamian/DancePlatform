@@ -73,9 +73,9 @@ namespace DancePlatform.Client.Infrastructure.Managers.Preferences
             var preference = await GetPreference() as ClientPreference;
             if (preference != null)
             {
-                if (preference.IsDarkMode == true) return BlazorHeroTheme.DarkTheme;
+                if (preference.IsDarkMode == true) return DanceFairAndSquareTheme.DarkTheme;
             }
-            return BlazorHeroTheme.DefaultTheme;
+            return DanceFairAndSquareTheme.DefaultTheme;
         }
         public async Task<bool> IsRTL()
         {

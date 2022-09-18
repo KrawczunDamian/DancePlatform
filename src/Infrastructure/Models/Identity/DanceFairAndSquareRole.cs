@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DancePlatform.Infrastructure.Models.Identity
 {
-    public class BlazorHeroRole : IdentityRole, IAuditableEntity<string>
+    public class DanceFairAndSquareRole : IdentityRole, IAuditableEntity<string>
     {
         public string Description { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime? LastModifiedOn { get; set; }
-        public virtual ICollection<BlazorHeroRoleClaim> RoleClaims { get; set; }
+        public virtual ICollection<DanceFairAndSquareRoleClaim> RoleClaims { get; set; }
 
-        public BlazorHeroRole() : base()
+        public DanceFairAndSquareRole() : base()
         {
-            RoleClaims = new HashSet<BlazorHeroRoleClaim>();
+            RoleClaims = new HashSet<DanceFairAndSquareRoleClaim>();
         }
 
-        public BlazorHeroRole(string roleName, string roleDescription = null) : base(roleName)
+        public DanceFairAndSquareRole(string roleName, string roleDescription = null) : base(roleName)
         {
-            RoleClaims = new HashSet<BlazorHeroRoleClaim>();
+            RoleClaims = new HashSet<DanceFairAndSquareRoleClaim>();
             Description = roleDescription;
         }
     }

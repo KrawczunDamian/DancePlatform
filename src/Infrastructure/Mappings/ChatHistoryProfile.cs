@@ -9,7 +9,7 @@ namespace DancePlatform.Infrastructure.Mappings
     {
         public ChatHistoryProfile()
         {
-            CreateMap<ChatHistory<IChatUser>, ChatHistory<BlazorHeroUser>>().ReverseMap();
+            CreateMap<ChatHistory<IChatUser>, ChatHistory<DanceFairAndSquareUser>>().ReverseMap();
         }
     }
 }

@@ -10,9 +10,9 @@ namespace DancePlatform.Infrastructure.Repositories
 {
     public class RepositoryAsync<T, TId> : IRepositoryAsync<T, TId> where T : AuditableEntity<TId>
     {
-        private readonly BlazorHeroContext _dbContext;
+        private readonly DanceFairAndSquareContext _dbContext;
 
-        public RepositoryAsync(BlazorHeroContext dbContext)
+        public RepositoryAsync(DanceFairAndSquareContext dbContext)
         {
             _dbContext = dbContext;
         }

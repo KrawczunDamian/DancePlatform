@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DancePlatform.Infrastructure.Contexts
 {
-    public abstract class AuditableContext : IdentityDbContext<BlazorHeroUser, BlazorHeroRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, BlazorHeroRoleClaim, IdentityUserToken<string>>
+    public abstract class AuditableContext : IdentityDbContext<DanceFairAndSquareUser, DanceFairAndSquareRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, DanceFairAndSquareRoleClaim, IdentityUserToken<string>>
     {
         protected AuditableContext(DbContextOptions options) : base(options)
         {

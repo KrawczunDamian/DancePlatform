@@ -7,47 +7,47 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[contributors-shield]: https://img.shields.io/github/contributors/blazorhero/CleanArchitecture.svg?style=flat-square
-[contributors-url]: https://github.com/blazorhero/CleanArchitecture/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/blazorhero/CleanArchitecture?style=flat-square
-[forks-url]: https://github.com/blazorhero/CleanArchitecture/network/members
-[stars-shield]: https://img.shields.io/github/stars/blazorhero/CleanArchitecture.svg?style=flat-square
-[stars-url]: https://img.shields.io/github/stars/blazorhero/CleanArchitecture?style=flat-square
-[issues-shield]: https://img.shields.io/github/issues/blazorhero/CleanArchitecture?style=flat-square
-[issues-url]: https://github.com/blazorhero/CleanArchitecture/issues
-[license-shield]: https://img.shields.io/github/license/blazorhero/CleanArchitecture?style=flat-square
-[license-url]: https://github.com/blazorhero/CleanArchitecture/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/DanceFairAndSquare/CleanArchitecture.svg?style=flat-square
+[contributors-url]: https://github.com/DanceFairAndSquare/CleanArchitecture/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/DanceFairAndSquare/CleanArchitecture?style=flat-square
+[forks-url]: https://github.com/DanceFairAndSquare/CleanArchitecture/network/members
+[stars-shield]: https://img.shields.io/github/stars/DanceFairAndSquare/CleanArchitecture.svg?style=flat-square
+[stars-url]: https://img.shields.io/github/stars/DanceFairAndSquare/CleanArchitecture?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/DanceFairAndSquare/CleanArchitecture?style=flat-square
+[issues-url]: https://github.com/DanceFairAndSquare/CleanArchitecture/issues
+[license-shield]: https://img.shields.io/github/license/DanceFairAndSquare/CleanArchitecture?style=flat-square
+[license-url]: https://github.com/DanceFairAndSquare/CleanArchitecture/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/iammukeshm/
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/blazorhero/CleanArchitecture">
-    <img src="https://codewithmukesh.com/wp-content/uploads/2021/05/BlazorHeroBannerv2.1.jpg" alt="Blazor Hero">
+  <a href="https://github.com/DanceFairAndSquare/CleanArchitecture">
+    <img src="https://codewithmukesh.com/wp-content/uploads/2021/05/DanceFairAndSquareBannerv2.1.jpg" alt="Blazor Hero">
   </a>
-  <h3 align="center">BlazorHero - Clean Architecture Template</h3>
+  <h3 align="center">DanceFairAndSquare - Clean Architecture Template</h3>
   <p align="center">
     Open Sourced Solution Template For Blazor Web-Assembly 5.0 built with MudBlazor Components
     <br />
     <a href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/"><strong>Read the Documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/blazorhero/CleanArchitecture/issues">Report Bug</a>
+    <a href="https://github.com/DanceFairAndSquare/CleanArchitecture/issues">Report Bug</a>
     ·
-    <a href="https://github.com/blazorhero/CleanArchitecture/issues">Request Feature</a>
+    <a href="https://github.com/DanceFairAndSquare/CleanArchitecture/issues">Request Feature</a>
     .
-    <a href="https://github.com/blazorhero/CleanArchitecture/issues">Request Documentation</a>
+    <a href="https://github.com/DanceFairAndSquare/CleanArchitecture/issues">Request Documentation</a>
   </p>
 </p>
 
 ## About The Project :zap:
 
-BlazorHero is a Clean Architecture Solution Template for Blazor Webassembly 5.0 built with MudBlazor Components.
+DanceFairAndSquare is a Clean Architecture Solution Template for Blazor Webassembly 5.0 built with MudBlazor Components.
 
 ## Complete Overview - Youtube Video 🆕 📈
 
-So, here is an in-depth video that takes you through the BlazorHero Project! Do Like & Subscribe to my Youtube channel! It would be great if you could leave behind your valuable feedback in the comments section of the Video. This helps me reach a much wider audience with time :)
+So, here is an in-depth video that takes you through the DanceFairAndSquare Project! Do Like & Subscribe to my Youtube channel! It would be great if you could leave behind your valuable feedback in the comments section of the Video. This helps me reach a much wider audience with time :)
 
 <a href="https://www.youtube.com/watch?v=j7BxKN7HYjk&lc=Ugy1SjDcmP0pboRxJe94AaABAg">Watch it here!</a>
 
@@ -58,7 +58,7 @@ So, here is an in-depth video that takes you through the BlazorHero Project! Do 
 - Blazor WebAssembly 5.0 - ASP.NET Core Hosted Model
 - [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/)
 
-# BlazorHero v2.2
+# DanceFairAndSquare v2.2
 
 - UI Improvements
 - Docker Support
@@ -68,11 +68,11 @@ So, here is an in-depth video that takes you through the BlazorHero Project! Do 
 - Minor Bug Fixes
 - Better Project Structure
 
-# What to Excpect in BlazorHero 3.0?
+# What to Excpect in DanceFairAndSquare 3.0?
 
 - Modular Architecture
 - Cleaner Seperation Of Code
-- Dedicated Documentation Website - [Here](https://blazorhero.github.io/docs/)
+- Dedicated Documentation Website - [Here](https://DanceFairAndSquare.github.io/docs/)
 - Tutorials to add new entities, controllers
 - UI Updates
 - Support for PostgreSQL / MySQL - Easy DB Switching
@@ -88,7 +88,7 @@ So, here is an in-depth video that takes you through the BlazorHero Project! Do 
 # Getting Started 🦸
 
 > **Important**
-If you are already using Blazor Hero v1.x, make sure that you drop your existing database and re-update your database using the CLI as there are couple of new migrations added that may clash with your existing schema. Also, install the latest version of BlazorHero.
+If you are already using Blazor Hero v1.x, make sure that you drop your existing database and re-update your database using the CLI as there are couple of new migrations added that may clash with your existing schema. Also, install the latest version of DanceFairAndSquare.
 
 The easiest way to get started with Blazor Hero is to install the [NuGet package](https://www.nuget.org/packages/DancePlatform/) and run `dotnet new DancePlatform`:
 
@@ -97,7 +97,7 @@ The easiest way to get started with Blazor Hero is to install the [NuGet package
 3. Install the latest version of Visual Studio IDE 2019 (v16.8 and above) 🚀
 4. Open up Command Prompt and run `dotnet new --install DancePlatform` to install the project template
 5. Create a folder for your solution and cd into it (the template will use it as project name)
-6. Run `dotnet new DancePlatform` to create a new Solution with all the Awesomeness 🕶️ of BlazorHero 🦸
+6. Run `dotnet new DancePlatform` to create a new Solution with all the Awesomeness 🕶️ of DanceFairAndSquare 🦸
 
 What to do next? Read the [entire guide on my blog](https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/).
 
@@ -109,25 +109,25 @@ What to do next? Read the [entire guide on my blog](https://codewithmukesh.com/b
     - `dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p securePassword123`
     - `dotnet dev-certs https --trust`
     - Note - Make sure that you use the same password that has been configured in the `docker-compose.yml` file. By default, `securePassword123` is configured.
-- 5005 & 5006 are the ports setup to run blazorHero on Docker, so make sure that these ports are free. You could also change the ports in the `docker-compose.yml` and `Server\Dockerfile` files.
-- Now navigate back to the root of the BlazorHero Project on your local machine and run the following via terminal - `docker-compose -f 'docker-compose.yml' up --build`
+- 5005 & 5006 are the ports setup to run DanceFairAndSquare on Docker, so make sure that these ports are free. You could also change the ports in the `docker-compose.yml` and `Server\Dockerfile` files.
+- Now navigate back to the root of the DanceFairAndSquare Project on your local machine and run the following via terminal - `docker-compose -f 'docker-compose.yml' up --build`
 - This will start pulling MSSQL Server Image from Docker Hub if you don't already have this image. It's around 500+ Mbs of download.
 - Once that is done, dotnet SDKs and runtimes are downloaded, if not present already. That's almost 200+ more Mbs of download.
 - PS If you find any issues while Docker installs the nuget packages, it is most likelt that your ssl certificates are not intalled properly. Apart from that I also added the `--disable-parallel` in the `Server\Dockerfile`to ensure network issues don't pop-up. You can remove this option to speed up the build process.
 - That's almost everything. Once the containers are available, migrations are updated in the MSSQL DB, default data is seeded.
-- Browse to https://localhost:5005/ to use your version of BlazorHero !
+- Browse to https://localhost:5005/ to use your version of DanceFairAndSquare !
 
 # Complete Documentation :rocket:
 
 Getting started with Blazor Hero – A Clean Architecture Template built for Blazor WebAssembly using MudBlazor Components. This project will make your Blazor Learning Process much easier than you anticipate. Blazor Hero is meant to be an Enterprise Level Boilerplate, which comes free of cost, completely open sourced. 
 
-The provided documentation / guide will get you started with BlazorHero in no-time. It provides a complete walkthrough about the project with to-the-point guides and notes.
+The provided documentation / guide will get you started with DanceFairAndSquare in no-time. It provides a complete walkthrough about the project with to-the-point guides and notes.
 
 <a href="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/"><strong>Read the Quick Start Guide</strong></a>
 
 # Features
 
-All the completed and the upcoming features are mentioned in the [Features.MD File](https://github.com/blazorhero/CleanArchitecture/blob/master/Features.md)
+All the completed and the upcoming features are mentioned in the [Features.MD File](https://github.com/DanceFairAndSquare/CleanArchitecture/blob/master/Features.md)
 
 ## Contributing
 
@@ -145,7 +145,7 @@ Here are the few contributions that I would highly appreciate ;)
 - [ ] Need someone to implement localization throughout every Razor Component of the solution under the WASM(Client) Project. You can take the Pages/Authentication/Login.razor as the point of reference. It is as simple as adding `@inject Microsoft.Extensions.Localization.IStringLocalizer<Login> localizer` to every page, changing the texts to `@localizer["Text Here"]` and finally adding resx files to the Resources Folder as per the folder structure.
 - [ ] Need few contributors to add in various language transalations as per the implemented Location. I got time to only add a few transalations for French as of now.
 - [ ] Need a UI contributor to look at the UX/UI of the entire project
-- [ ] Need someone to buildup a cool Material Logo for BlazorHero (BH):D Do contact me on LinkedIn (https://www.linkedin.com/in/iammukeshm/).
+- [ ] Need someone to buildup a cool Material Logo for DanceFairAndSquare (BH):D Do contact me on LinkedIn (https://www.linkedin.com/in/iammukeshm/).
 - [ ] And finally, Stars from everyone! :D
 
 ## License

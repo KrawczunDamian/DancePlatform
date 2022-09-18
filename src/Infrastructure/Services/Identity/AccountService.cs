@@ -15,15 +15,15 @@ namespace DancePlatform.Infrastructure.Services.Identity
 {
     public class AccountService : IAccountService
     {
-        private readonly UserManager<BlazorHeroUser> _userManager;
-        private readonly SignInManager<BlazorHeroUser> _signInManager;
+        private readonly UserManager<DanceFairAndSquareUser> _userManager;
+        private readonly SignInManager<DanceFairAndSquareUser> _signInManager;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AccountService> _localizer;
         private readonly IMapper _mapper;
 
         public AccountService(
-            UserManager<BlazorHeroUser> userManager,
-            SignInManager<BlazorHeroUser> signInManager,
+            UserManager<DanceFairAndSquareUser> userManager,
+            SignInManager<DanceFairAndSquareUser> signInManager,
             IUploadService uploadService,
             IStringLocalizer<AccountService> localizer,
             IMapper mapper)

@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DancePlatform.Infrastructure.Migrations
 {
-    [DbContext(typeof(BlazorHeroContext))]
-    [Migration("20210526094834_AddBlazorHeroRole")]
-    partial class AddBlazorHeroRole
+    [DbContext(typeof(DanceFairAndSquareContext))]
+    [Migration("20210526094834_AddDanceFairAndSquareRole")]
+    partial class AddDanceFairAndSquareRole
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,7 +85,7 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("ChatHistory");
                 });
 
-            modelBuilder.Entity("DancePlatform.Application.Models.Identity.BlazorHeroRole", b =>
+            modelBuilder.Entity("DancePlatform.Application.Models.Identity.DanceFairAndSquareRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -127,7 +127,7 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("Roles", "Identity");
                 });
 
-            modelBuilder.Entity("DancePlatform.Application.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -447,11 +447,11 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("DancePlatform.Application.Models.Chat.ChatHistory", b =>
                 {
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroUser", "FromUser")
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", "FromUser")
                         .WithMany("ChatHistoryFromUsers")
                         .HasForeignKey("FromUserId");
 
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroUser", "ToUser")
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", "ToUser")
                         .WithMany("ChatHistoryToUsers")
                         .HasForeignKey("ToUserId");
 
@@ -473,7 +473,7 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroRole", null)
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -482,7 +482,7 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -491,7 +491,7 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -500,13 +500,13 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroRole", null)
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -515,14 +515,14 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DancePlatform.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DancePlatform.Application.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("DancePlatform.Application.Models.Identity.DanceFairAndSquareUser", b =>
                 {
                     b.Navigation("ChatHistoryFromUsers");
 

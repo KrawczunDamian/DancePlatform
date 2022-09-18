@@ -2,7 +2,7 @@
 
 namespace DancePlatform.Client.Infrastructure.Settings
 {
-    public class BlazorHeroTheme
+    public class DanceFairAndSquareTheme
     {
         private static Typography DefaultTypography = new Typography()
         {

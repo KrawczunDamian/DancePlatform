@@ -19,14 +19,14 @@ namespace DancePlatform.Infrastructure
     {
         private readonly ILogger<DatabaseSeeder> _logger;
         private readonly IStringLocalizer<DatabaseSeeder> _localizer;
-        private readonly BlazorHeroContext _db;
-        private readonly UserManager<BlazorHeroUser> _userManager;
-        private readonly RoleManager<BlazorHeroRole> _roleManager;
+        private readonly DanceFairAndSquareContext _db;
+        private readonly UserManager<DanceFairAndSquareUser> _userManager;
+        private readonly RoleManager<DanceFairAndSquareRole> _roleManager;
 
         public DatabaseSeeder(
-            UserManager<BlazorHeroUser> userManager,
-            RoleManager<BlazorHeroRole> roleManager,
-            BlazorHeroContext db,
+            UserManager<DanceFairAndSquareUser> userManager,
+            RoleManager<DanceFairAndSquareRole> roleManager,
+            DanceFairAndSquareContext db,
             ILogger<DatabaseSeeder> logger,
             IStringLocalizer<DatabaseSeeder> localizer)
         {
@@ -49,7 +49,7 @@ namespace DancePlatform.Infrastructure
             Task.Run(async () =>
             {
                 //Check if Role Exists
-                var adminRole = new BlazorHeroRole(RoleConstants.AdministratorRole, _localizer["Administrator role with full permissions"]);
+                var adminRole = new DanceFairAndSquareRole(RoleConstants.AdministratorRole, _localizer["Administrator role with full permissions"]);
                 var adminRoleInDb = await _roleManager.FindByNameAsync(RoleConstants.AdministratorRole);
                 if (adminRoleInDb == null)
                 {
@@ -58,12 +58,12 @@ namespace DancePlatform.Infrastructure
                     _logger.LogInformation(_localizer["Seeded Administrator Role."]);
                 }
                 //Check if User Exists
-                var superUser = new BlazorHeroUser
+                var superUser = new DanceFairAndSquareUser
                 {
-                    FirstName = "Mukesh",
-                    LastName = "Murugan",
-                    Email = "mukesh@blazorhero.com",
-                    UserName = "mukesh",
+                    FirstName = "Super",
+                    LastName = "Admin",
+                    Email = "krawczun.d@gmail.com",
+                    UserName = "admin",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
                     CreatedOn = DateTime.Now,
@@ -98,7 +98,7 @@ namespace DancePlatform.Infrastructure
             Task.Run(async () =>
             {
                 //Check if Role Exists
-                var basicRole = new BlazorHeroRole(RoleConstants.BasicRole, _localizer["Basic role with default permissions"]);
+                var basicRole = new DanceFairAndSquareRole(RoleConstants.BasicRole, _localizer["Basic role with default permissions"]);
                 var basicRoleInDb = await _roleManager.FindByNameAsync(RoleConstants.BasicRole);
                 if (basicRoleInDb == null)
                 {
@@ -106,12 +106,12 @@ namespace DancePlatform.Infrastructure
                     _logger.LogInformation(_localizer["Seeded Basic Role."]);
                 }
                 //Check if User Exists
-                var basicUser = new BlazorHeroUser
+                var basicUser = new DanceFairAndSquareUser
                 {
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Email = "john@blazorhero.com",
-                    UserName = "johndoe",
+                    FirstName = "Standard",
+                    LastName = "User",
+                    Email = "krawczunowy1@gmail.com",
+                    UserName = "user",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
                     CreatedOn = DateTime.Now,

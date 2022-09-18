@@ -3,7 +3,7 @@ using DancePlatform.Application.Specifications.Base;
 
 namespace DancePlatform.Infrastructure.Specifications
 {
-    public class UserFilterSpecification : HeroSpecification<BlazorHeroUser>
+    public class UserFilterSpecification : HeroSpecification<DanceFairAndSquareUser>
     {
         public UserFilterSpecification(string searchString)
         {

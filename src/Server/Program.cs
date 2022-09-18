@@ -22,7 +22,7 @@ namespace DancePlatform.Server
 
                 try
                 {
-                    var context = services.GetRequiredService<BlazorHeroContext>();
+                    var context = services.GetRequiredService<DanceFairAndSquareContext>();
 
                     if (context.Database.IsSqlServer())
                     {

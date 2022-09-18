@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DancePlatform.Infrastructure.Migrations
 {
-    public partial class AddBlazorHeroRole : Migration
+    public partial class AddDanceFairAndSquareRole : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

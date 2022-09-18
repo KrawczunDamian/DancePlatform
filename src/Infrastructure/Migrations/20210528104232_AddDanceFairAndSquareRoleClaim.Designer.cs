@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DancePlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(DanceFairAndSquareContext))]
-    [Migration("20220815141116_CreateTeamTable")]
-    partial class CreateTeamTable
+    [Migration("20210528104232_AddDanceFairAndSquareRoleClaim")]
+    partial class AddDanceFairAndSquareRoleClaim
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DancePlatform.Application.Models.Chat.ChatHistory<DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser>", b =>
@@ -77,9 +77,6 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.Property<decimal>("Tax")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("TestField")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
@@ -129,32 +126,23 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("DancePlatform.Domain.Entities.Organisations.Team", b =>
+            modelBuilder.Entity("DancePlatform.Domain.Entities.Document", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastModifiedBy")
@@ -163,18 +151,15 @@ namespace DancePlatform.Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("URL")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfilePictureURL")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("DancePlatform.Infrastructure.Models.Audit.Audit", b =>
@@ -300,7 +285,6 @@ namespace DancePlatform.Infrastructure.Migrations
             modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -507,13 +491,11 @@ namespace DancePlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRoleClaim", b =>
                 {
-                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", "Role")
-                        .WithMany("RoleClaims")
+                    b.HasOne("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", null)
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -556,11 +538,6 @@ namespace DancePlatform.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareRole", b =>
-                {
-                    b.Navigation("RoleClaims");
                 });
 
             modelBuilder.Entity("DancePlatform.Infrastructure.Models.Identity.DanceFairAndSquareUser", b =>
