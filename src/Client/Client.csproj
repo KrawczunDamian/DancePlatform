@@ -24,14 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Shared\Components\DanceFairAndSquareLogo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Shared\Components\DanceFairAndSquareLogo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Client.Infrastructure\Client.Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

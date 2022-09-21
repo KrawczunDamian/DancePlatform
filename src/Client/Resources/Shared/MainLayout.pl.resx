@@ -120,50 +120,20 @@
   <data name="Account" xml:space="preserve">
     <value>Konto</value>
   </data>
-  <data name="Buy Me A Coffee!" xml:space="preserve">
-    <value>Buy Me A Coffee!</value>
-  </data>
-  <data name="Chat?" xml:space="preserve">
-    <value>Chat?</value>
-  </data>
-  <data name="Community" xml:space="preserve">
-    <value>Community</value>
-  </data>
-  <data name="Facebook Group" xml:space="preserve">
-    <value>Facebook Group</value>
-  </data>
-  <data name="Facebook Page" xml:space="preserve">
-    <value>Facebook Page</value>
-  </data>
-  <data name="Fork Repository" xml:space="preserve">
-    <value>Fork Repository</value>
-  </data>
   <data name="Logout" xml:space="preserve">
     <value>Wyloguj się</value>
   </data>
   <data name="Logout Confirmation" xml:space="preserve">
     <value>Naprawdę się wylogować?</value>
   </data>
-  <data name="MudBlazor Documentation" xml:space="preserve">
-    <value>MudBlazor Documentation</value>
-  </data>
-  <data name="Quick-Start Guide" xml:space="preserve">
-    <value>Quick-Start Guide</value>
-  </data>
   <data name="Refreshed Token." xml:space="preserve">
     <value>Odświezony token</value>
-  </data>
-  <data name="Resources" xml:space="preserve">
-    <value>Resources</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Support</value>
   </data>
   <data name="Toggle Dark Mode" xml:space="preserve">
     <value>Przejdź w tryb ciemny</value>
   </data>
   <data name="Toggle right-to-left/left-to-right" xml:space="preserve">
-    <value>Toggle right-to-left/left-to-right</value>
+    <value>Przełącz prawo/lewo</value>
   </data>
   <data name="You are logged out because the Permissions of one of your Roles have been updated." xml:space="preserve">
     <value>Wylogowano Cię przez aktualizację dostępów jednej z Twoich ról</value>

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Folder Include="Files\Images\TeamProfilePictures\" />
     <Folder Include="Files\Images\ProfilePictures\" />
+    <Folder Include="Files\Background\" />
   </ItemGroup>
 
 
