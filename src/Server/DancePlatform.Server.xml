@@ -334,5 +334,12 @@
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
+        <member name="M:DancePlatform.Server.Controllers.v1.UserProfile.DancersController.Post(DancePlatform.Application.Features.Teams.Commands.AddEdit.AddEditDancerCommand)">
+            <summary>
+            Create/Update a dancer profile
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
     </members>
 </doc>

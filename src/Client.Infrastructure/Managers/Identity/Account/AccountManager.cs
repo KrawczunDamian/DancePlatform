@@ -40,9 +40,9 @@ namespace DancePlatform.Client.Infrastructure.Managers.Identity.Account
             var response = await _httpClient.PostAsJsonAsync(Routes.AccountEndpoints.UpdateProfilePicture(userId), request);
             return await response.ToResult<string>();
         }
-        public async Task<IResult> UpdateDancerAsync(UpdateDancerRequest request, string userId)
+        public async Task<IResult> UpdateDancerAsync(UpdateDancerRequest request)
         {
-            var response = await _httpClient.PutAsJsonAsync(Routes.AccountEndpoints.UpdateDancer(userId), request);
+            var response = await _httpClient.PutAsJsonAsync(Routes.DancersEndpoints.UpdateDancer, request);
             return await response.ToResult();
         }
     }

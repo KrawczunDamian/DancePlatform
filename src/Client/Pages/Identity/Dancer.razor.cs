@@ -1,4 +1,5 @@
 ﻿using Blazored.FluentValidation;
+using DancePlatform.Application.Features.Dancers.Queries.GetById;
 using DancePlatform.Application.Requests.Identity;
 using DancePlatform.Client.Extensions;
 using DancePlatform.Client.Infrastructure.Managers.UserProfile;
@@ -13,8 +14,8 @@ namespace DancePlatform.Client.Pages.Identity
         [Inject] private IDancerManager DancerManager { get; set; }
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private readonly UpdateDancerRequest _dancerModel = new();
 
+        private GetDancerByAccountIdResponse _dancer = new();
         public string UserId { get; set; }
 
 
@@ -24,7 +25,14 @@ namespace DancePlatform.Client.Pages.Identity
         }
         private async Task UpdateDancerAsync()
         {
-            var response = await _accountManager.UpdateDancerAsync(_dancerModel, UserId);
+            var request = new UpdateDancerRequest()
+            {
+                Id = _dancer.Id > 0 ? _dancer.Id : 0,
+                Nickname = _dancer.Nickname,
+                Weight = _dancer.Weight,
+                Height = _dancer.Height
+            };
+            var response = await _accountManager.UpdateDancerAsync(request);
             if (response.Succeeded)
             {
                 await _authenticationManager.Logout();
@@ -44,7 +52,8 @@ namespace DancePlatform.Client.Pages.Identity
             var state = await _stateProvider.GetAuthenticationStateAsync();
             var user = state.User;
             UserId = user.GetUserId();
-            //_profileModel.Email = user.GetEmail();
+            var dancer = await DancerManager.GetByAccountIdAsync(UserId);
+            _dancer = dancer.Data;
         }
     }
 }

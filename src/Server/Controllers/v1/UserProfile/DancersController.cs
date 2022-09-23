@@ -1,5 +1,6 @@
 ﻿using DancePlatform.Application.Features.Dancers.Queries.GetAll;
 using DancePlatform.Application.Features.Dancers.Queries.GetById;
+using DancePlatform.Application.Features.Teams.Commands.AddEdit;
 using DancePlatform.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,8 @@ namespace DancePlatform.Server.Controllers.v1.UserProfile
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var teams = await _mediator.Send(new GetAllDancersQuery());
-            return Ok(teams);
+            var dancers = await _mediator.Send(new GetAllDancersQuery());
+            return Ok(dancers);
         }
         /// <summary>
         /// Get a Dancer By Account Id
@@ -28,8 +29,18 @@ namespace DancePlatform.Server.Controllers.v1.UserProfile
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var team = await _mediator.Send(new GetDancerByAccountIdQuery() { AccountId = id });
-            return Ok(team);
+            var dancer = await _mediator.Send(new GetDancerByAccountIdQuery() { AccountId = id });
+            return Ok(dancer);
+        }
+        /// <summary>
+        /// Create/Update a dancer profile
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPut]
+        public async Task<IActionResult> Post(AddEditDancerCommand command)
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }

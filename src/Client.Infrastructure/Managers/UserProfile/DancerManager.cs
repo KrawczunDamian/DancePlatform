@@ -21,7 +21,7 @@ namespace DancePlatform.Client.Infrastructure.Managers.UserProfile
             var response = await _httpClient.GetAsync(Routes.DancersEndpoints.GetAll);
             return await response.ToResult<List<GetDancersWithProfileInfoResponse>>();
         }
-        public async Task<IResult<GetDancerByAccountIdResponse>> GetByIdAsync(string id)
+        public async Task<IResult<GetDancerByAccountIdResponse>> GetByAccountIdAsync(string id)
         {
             var response = await _httpClient.GetAsync($"{Routes.DancersEndpoints.GetByAccountId}/{id}");
             return await response.ToResult<GetDancerByAccountIdResponse>();

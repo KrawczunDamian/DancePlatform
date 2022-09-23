@@ -15,9 +15,5 @@
         {
             return $"api/identity/account/profile-picture/{userId}";
         }
-        public static string UpdateDancer(string userId)
-        {
-            return $"api/identity/account/updatedancer/{userId}";
-        }
     }
 }

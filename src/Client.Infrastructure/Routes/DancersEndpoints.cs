@@ -4,5 +4,6 @@
     {
         public static string GetAll = "api/v1/dancers";
         public static string GetByAccountId = "api/v1/dancers";
+        public static string UpdateDancer = "api/v1/dancers";
     }
 }
