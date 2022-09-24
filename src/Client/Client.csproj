@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.1" />
-    <PackageReference Include="bunit" Version="1.10.14" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.7" />
