@@ -117,61 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>Account</value>
+  <data name="Access Resources here." xml:space="preserve">
+    <value>Access Resources here.</value>
   </data>
-  <data name="Buy Me A Coffee!" xml:space="preserve">
-    <value>Buy Me A Coffee!</value>
+  <data name="Awesome Blazor" xml:space="preserve">
+    <value>Awesome Blazor</value>
   </data>
-  <data name="Chat?" xml:space="preserve">
-    <value>Chat?</value>
-  </data>
-  <data name="Community" xml:space="preserve">
-    <value>Community</value>
-  </data>
-  <data name="Facebook Group" xml:space="preserve">
-    <value>Facebook Group</value>
-  </data>
-  <data name="Facebook Page" xml:space="preserve">
-    <value>Facebook Page</value>
-  </data>
-  <data name="Fork Repository" xml:space="preserve">
-    <value>Fork Repository</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="Logout Confirmation" xml:space="preserve">
-    <value>Do you really want to Logout?</value>
-  </data>
-  <data name="MudBlazor Documentation" xml:space="preserve">
-    <value>MudBlazor Documentation</value>
-  </data>
-  <data name="Quick-Start Guide" xml:space="preserve">
-    <value>Quick-Start Guide</value>
-  </data>
-  <data name="Refreshed Token." xml:space="preserve">
-    <value>Refreshed Token.</value>
+  <data name="Awesome Blazor Description" xml:space="preserve">
+    <value>Great place to learn, find information and projects/examples about Blazor.</value>
   </data>
   <data name="Resources" xml:space="preserve">
     <value>Resources</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="Toggle Dark Mode" xml:space="preserve">
-    <value>Toggle Dark Mode</value>
-  </data>
-  <data name="Toggle right-to-left/left-to-right" xml:space="preserve">
-    <value>Toggle right-to-left/left-to-right</value>
-  </data>
-  <data name="You are logged out because the Permissions of one of your Roles have been updated." xml:space="preserve">
-    <value>You are logged out because the Permissions of one of your Roles have been updated.</value>
-  </data>
-  <data name="You are logged out because the user with your Token has been deleted." xml:space="preserve">
-    <value>You are logged out because the user with your Token has been deleted.</value>
-  </data>
-  <data name="You are Logged Out." xml:space="preserve">
-    <value>You are Logged Out.</value>
   </data>
 </root>
