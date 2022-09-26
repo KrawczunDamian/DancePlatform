@@ -29,17 +29,7 @@ namespace DancePlatform.Application.Features.Dancers.Queries.GetById
         {
             var allDancers = await _unitOfWork.Repository<Dancer>().GetAllAsync();
             var dancer = allDancers.FirstOrDefault(x => x.CreatedBy == query.AccountId && x.IsDeleted != true);
-            if (dancer == null)
-            {
-                return await Result<GetDancerByAccountIdResponse>.SuccessAsync(new GetDancerByAccountIdResponse() { Id = 0 });
-            }
-            var mappedDancer = new GetDancerByAccountIdResponse()
-            {
-                Id = dancer.Id,
-                Nickname = dancer.Nickname,
-                Weight = dancer.Weight,
-                Height = dancer.Height
-            };
+            var mappedDancer = _mapper.Map<GetDancerByAccountIdResponse>(dancer);
             return await Result<GetDancerByAccountIdResponse>.SuccessAsync(mappedDancer);
         }
     }

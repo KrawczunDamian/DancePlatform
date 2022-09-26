@@ -1,48 +1,22 @@
 ﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Dancer> _localizer
 
-<EditForm Model="@_dancer" OnValidSubmit="UpdateDancerAsync">
+<EditForm Model="@_dancerModel" OnValidSubmit="UpdateDancerAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudCard Elevation="25">
         <MudCardHeader>
             <CardHeaderContent>
-                @if (_dancer.Id > 0)
-                {
-                    <MudText>@_localizer["Edit Dancer"]</MudText>
-                }
-                else
-                {
-                    <MudText>@_localizer["Create Dancer"]</MudText>
-                }
+                <MudText>@_localizer["Change Password"]</MudText>
             </CardHeaderContent>
         </MudCardHeader>
         <MudCardContent>
             <MudGrid>
-                @if (_dancer.Id > 0)
-                {
-                    <MudItem xs="12" md="6" hidden>
-                        <MudTextField Disabled @bind-Value="_dancer.Id" For="@(() => _dancer.Id)" Label="@_localizer["Id"]" hidden />
-                    </MudItem>
-                }
-                <MudItem xs="12" md="6">
-                    <MudTextField T="string" @bind-Value="_dancer.Nickname" For="@(() => _dancer.Nickname)" Label="@_localizer["Nickname"]" Variant="Variant.Outlined" />
-                </MudItem>
-                <MudItem xs="12" md="6">
-                    <MudTextField @bind-Value="_dancer.Weight" For="@(() => _dancer.Weight)" Label="@_localizer["Weight"]" Variant="Variant.Outlined" />
-                </MudItem>
-                <MudItem xs="12" md="6">
-                    <MudTextField @bind-Value="_dancer.Height" For="@(() => _dancer.Height)" Label="@_localizer["Height"]" Variant="Variant.Outlined" />
-                </MudItem>
+                @*<MudItem xs="12" md="6">
+                    <MudTextField T="string" @bind-Value="_passwordModel.NewPassword" For="@(() => _passwordModel.NewPassword)" Label="@_localizer["Password"]" Variant="Variant.Outlined" InputType="_newPasswordInput" Adornment="Adornment.End" AdornmentIcon="@_newPasswordInputIcon" OnAdornmentClick="@(() => TogglePasswordVisibility(true))" />
+                </MudItem>*@
             </MudGrid>
         </MudCardContent>
         <MudCardActions Class="pb-4 pl-4">
-            @if (_dancer.Id > 0)
-            {
-                <MudButton Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="ml-auto">@_localizer["Save"]</MudButton>
-            }
-            else
-            {
-                <MudButton Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="ml-auto">@_localizer["Create"]</MudButton>
-            }
+            <MudButton Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="ml-auto">@_localizer["Change Password"]</MudButton>
         </MudCardActions>
     </MudCard>
 </EditForm>
