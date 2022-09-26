@@ -14,6 +14,6 @@ namespace DancePlatform.Client.Infrastructure.Managers.Identity.Account
         Task<IResult<string>> GetProfilePictureAsync(string userId);
 
         Task<IResult<string>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId);
-        Task<IResult> UpdateDancerAsync(UpdateDancerRequest request);
+        Task<IResult> UpdateDancerAsync(UpdateDancerRequest request, string userId);
     }
 }
