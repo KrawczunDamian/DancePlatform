@@ -30,3 +30,6 @@ Projekt ten powinien zostać ustawiony jako projekt startowy (prawy przycisk mys
 Klikając na klawiaturze 'F10' lub na przycisk uruchomienia projektu na interfejsie powinniśmy móc uruchomić projekt.
 Otworzy się strona internetowa, na widoku logowania. Na dole formularza umieszczone są przyciski uzupełniające dane logowania dla odpowiednich kont.
 Poleca się skorzystanie z nich celem testowania aplikacji.
+W przypadku braku otwartej strony internetowej po uruchomieniu projektu należy użyć adresu:
+https://localhost:44398
+lub https://localhost:5001
