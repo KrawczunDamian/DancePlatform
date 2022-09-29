@@ -99,7 +99,7 @@ namespace DancePlatform.Infrastructure.Services.Identity
                         var verificationUri = await SendVerificationEmail(user, origin);
                         var mailRequest = new MailRequest
                         {
-                            From = "mail@codewithmukesh.com",
+                            From = "krawczun.d@gmail.com",
                             To = user.Email,
                             Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
                             Subject = _localizer["Confirm Registration"]

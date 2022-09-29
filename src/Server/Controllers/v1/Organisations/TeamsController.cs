@@ -59,7 +59,6 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Delete)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -95,7 +94,6 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Create)]
         [HttpPost("updateProfilePicture")]
         public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureTeamCommand command)
         {
@@ -129,7 +127,6 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// <param name="dancerId"></param>
         /// <param name="teamId"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Edit)]
         [HttpDelete("removeMember/{teamId}/{dancerId}")]
         public async Task<IActionResult> RemoveMemberAsync(int teamId, int dancerId)
         {
@@ -140,7 +137,6 @@ namespace DancePlatform.Server.Controllers.v1.Organisations
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Teams.Edit)]
         [HttpPost("uploadTeamPicture")]
         public async Task<IActionResult> UploadTeamPicture(UploadPictureTeamCommand command)
         {

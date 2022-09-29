@@ -4,29 +4,26 @@
 <UserCard />
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
-    <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
-        @_localizer["Swagger"]
-    </MudNavLink>
-    <MudListSubheader Class="mt-2 mb-n2">@_localizer["Personal"]</MudListSubheader>
-    @if (_canViewDashboards)
+    @*@if (_canViewDashboards)
     {
-        <MudNavLink Href="/dashboard" Icon="@Icons.Material.Outlined.Dashboard">
-            @_localizer["Dashboard"]
-        </MudNavLink>
-    }
+        <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
+            @_localizer["Swagger"]
+    </MudNavLink>
+    }*@
+    <MudListSubheader Class="mt-2 mb-n2">@_localizer["Personal"]</MudListSubheader>
     <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.SupervisorAccount">
         @_localizer["Account"]
     </MudNavLink>
-    @if (_canViewAuditTrails)
-    {
-        <MudNavLink Href="/audit-trails" Icon="@Icons.Material.Outlined.Security">
-            @_localizer["Audit Trails"]
-        </MudNavLink>
-    }
 
-    @if (_canViewUsers || _canViewRoles)
+    @if (_canViewUsers || _canViewRoles || _canViewAuditTrails || _canViewDashboards)
     {
         <MudListSubheader Class="mt-2 mb-n2">@_localizer["Administrator"]</MudListSubheader>
+        @if (_canViewDashboards)
+        {
+            <MudNavLink Href="/dashboard" Icon="@Icons.Material.Outlined.Dashboard">
+                @_localizer["Dashboard"]
+            </MudNavLink>
+        }
         @if (_canViewUsers)
         {
             <MudNavLink Href="/identity/users" Icon="@Icons.Material.Outlined.Person">
@@ -37,6 +34,13 @@
         {
             <MudNavLink Href="/identity/roles" Icon="@Icons.Material.Outlined.Person">@_localizer["Roles"]</MudNavLink>
         }
+        @if (_canViewAuditTrails)
+        {
+            <MudNavLink Href="/audit-trails" Icon="@Icons.Material.Outlined.Security">
+                @_localizer["Audit Trails"]
+            </MudNavLink>
+        }
+        
     }
     @if (_canViewChat)
     {

@@ -37,6 +37,8 @@ else
                         </div>
                         <MudText Class="d-flex justify-center ma-2" Style="font-weight:bold">@_team.Name</MudText>
                         <MudText Class="d-flex justify-center ma-2"><MudIcon Icon="@Icons.Filled.Smartphone"></MudIcon> @(_team.PhoneNumber == null ? "-" : _team.PhoneNumber) </MudText>
+                        @if(_currentUserId == _team.CreatedBy || _canEditTeam)
+                                                {
                         <InputFile id="fileInput" OnChange="UploadFiles" hidden />
                         <MudButton HtmlTag="label"
                                Variant="Variant.Text"
@@ -45,8 +47,9 @@ else
                                StartIcon="@Icons.Filled.CloudUpload"
                                for="fileInput"
                                Class="d-flex justify-center ma-2">
-                            @_localizer["Upload Image"]
+                            @_localizer["Upload Photo"]
                         </MudButton>
+                        }
                     </MudContainer>
                 </MudPaper>
                 <MudPaper Class="pa-2" Square="true">
@@ -75,7 +78,10 @@ else
                         <div>
                             <MudText Class="d-inline-block" Typo="Typo.h4" Color="Color.Primary">@_localizer["Photos"]</MudText>
                             <InputFile id="photoInput" OnChange="AddPhoto" hidden />
+                            @if (_currentUserId == _team.CreatedBy || _canEditTeam)
+                                                {
                             <MudButton HtmlTag="label" Style="float:right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface" for="photoInput">@_localizer["Upload Photo"]</MudButton>
+                                                }
                             <MudDivider></MudDivider>
                         </div>
                         @if (_teamGallery.Count > 0)
@@ -84,7 +90,10 @@ else
                                 <ItemTemplate>
                                     <div class="d-flex flex-column flex-column justify-center" style="height:90%">
                                         <img src="@context" style="max-height:450px;object-fit:scale-down">
+                                        @if(_currentUserId == _team.CreatedBy || _canEditTeam)
+                                        {
                                         <MudIconButton Size="Size.Small" OnClick="@((e) => RemovePicture(context))" Icon="@Icons.Material.Filled.Block" Color="Color.Error"></MudIconButton>
+                                        }
                                     </div>
                                 </ItemTemplate>
                             </MudCarousel>
@@ -98,7 +107,10 @@ else
                     </MudPaper>
                     <MudPaper Class="pa-2" Square="true">
                         <MudText Class="d-inline-block" Typo="Typo.h4" Color="Color.Primary">@_localizer["Members"]</MudText>
+                        @if (_currentUserId == _team.CreatedBy || _canEditTeam)
+                                                {
                         <MudButton Style="float: right" DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="@((e) => AddMember())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Member"]</MudButton>
+                                                }
                         <MudDivider></MudDivider>
                         <MudGrid>
                             @if (_teamMembers.Count > 0)
@@ -119,9 +131,12 @@ else
                                                     }
                                                 </div>
                                                 <MudText>@member.FirstName @member.Nickname @member.LastName</MudText>
+                                                @if (_currentUserId == _team.CreatedBy || _canEditTeam)
+                                                {
                                                 <div class="d-flex justify-center">
                                                     <MudIconButton OnClick="@((e) => RemoveMember(member.Id))" Icon="@Icons.Material.Filled.Block" Color="Color.Error"></MudIconButton>
                                                 </div>
+                                                }
                                             </MudCardContent>
                                         </MudCard>
                                     </MudItem>
