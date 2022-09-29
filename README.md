@@ -17,7 +17,7 @@ Subject of diploma thesis
 USING BLAZOR PLATFOR ON AN EXAMPLE APPLICATION THAT
 LETS DANCERS FORM COMMUNITIES
 
-Warstwy frontendowe i backendowe zrealizowane są przy użyciu Blazor'a. Bazę danych realizuje MS SQL Server.
+Warstwy frontendowe i backendowe zrealizowane są przy użyciu Blazor'a. Baza danych zaimplementowana jest w MS SQL Server.
 
 INSTRUKCJA URUCHOMIENIA:
 W przypadku braku wymaganych paczek NuGet należy zgodzić się w dowolnym momencie procesu uruchamiana na doinstalowanie ich.
